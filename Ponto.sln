@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33829.357
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ponto", "brincar\Ponto.csproj", "{51CE6AA5-5CE9-4E8D-BF71-68BBDA721D1F}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Instalador Ponto Lemarc", "C:\Users\bruno\OneDrive\Área de Trabalho\instalador\Instalador Ponto Lemarc\Instalador Ponto Lemarc.vdproj", "{D4B6367E-84D4-4273-AE1D-E6427DE58CA6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{51CE6AA5-5CE9-4E8D-BF71-68BBDA721D1F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51CE6AA5-5CE9-4E8D-BF71-68BBDA721D1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51CE6AA5-5CE9-4E8D-BF71-68BBDA721D1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51CE6AA5-5CE9-4E8D-BF71-68BBDA721D1F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D4B6367E-84D4-4273-AE1D-E6427DE58CA6}.Debug|Any CPU.ActiveCfg = Debug
+		{D4B6367E-84D4-4273-AE1D-E6427DE58CA6}.Release|Any CPU.ActiveCfg = Release
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B3750304-C411-476F-BD60-24078CBF368D}
+	EndGlobalSection
+EndGlobal
