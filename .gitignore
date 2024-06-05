@@ -230,6 +230,7 @@ _pkginfo.txt
 !?*.[Cc]ache/
 
 # Others
+*.zip
 ClientBin/
 ~$*
 *~
@@ -237,7 +238,6 @@ ClientBin/
 *.dbproj.schemaview
 *.jfm
 *.pfx
-*.zip
 *.publishsettings
 orleans.codegen.cs
 
