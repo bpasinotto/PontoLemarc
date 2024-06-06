@@ -26,7 +26,7 @@ namespace Ponto
 
         private void Form1_Load(object sender, EventArgs e)
         {             
-            activeTextBox = txtId;
+            activeTextBox = txtId;            
             txtId.Focus();
             LimparCampos();
             conexaoBanco = new ConexaoBanco();
@@ -169,7 +169,7 @@ namespace Ponto
         }
 
         private void txtId_Click(object sender, EventArgs e)
-        {
+        {            
             activeTextBox = (MaskedTextBox)sender; // Define o campo de texto como ativo
         }
 
@@ -207,8 +207,13 @@ namespace Ponto
 
 
         private void txtId_KeyDown(object sender, KeyEventArgs e)
-        {  
-            txtId.Text = txtId.Text.Replace(" ", "");
+        {           
+            // Opcional: Evita a movimentação do cursor com as teclas de seta
+            if (e.KeyCode == Keys.Left || e.KeyCode == Keys.Right)
+            {
+                e.Handled = true;
+            }
+
             if (e.KeyCode == Keys.Enter && txtId.Text != "")
             {                
 
@@ -290,7 +295,13 @@ namespace Ponto
 
         private void txtSenha_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter && txtSenha.Text != "" && txtId.Text != "")
+            // Opcional: Evita a movimentação do cursor com as teclas de seta
+            if (e.KeyCode == Keys.Left || e.KeyCode == Keys.Right)
+            {
+                e.Handled = true;
+            }
+
+            if (e.KeyCode == Keys.Enter && txtSenha.Text != "" && txtId.Text != "" && lblNomeFuncionario.Text != "")
             {
                 conexaoBanco = new ConexaoBanco();
                 bool validar = conexaoBanco.ValidarSenha(txtId.Text, txtSenha.Text);
@@ -322,7 +333,6 @@ namespace Ponto
         }
 
 
-
         private void lblHoraAtual_DoubleClick(object sender, EventArgs e)
         {
 
@@ -342,10 +352,30 @@ namespace Ponto
             frmRelatorioPonto consultaPonto = new frmRelatorioPonto();
             consultaPonto.ShowDialog();
         }
+               
 
-        private void lblNomeFuncionario_Click(object sender, EventArgs e)
+        private void txtId_MouseDown(object sender, MouseEventArgs e)
         {
+            // Evita a movimentação do cursor ao clicar com o mouse
+            txtId.SelectionStart = txtId.Text.Length;            
+        }
 
+        private void txtId_MouseMove(object sender, MouseEventArgs e)
+        {
+            // Evita selecionar o texto com o mouse
+            txtId.SelectionLength = 0;
+        }
+
+        private void txtSenha_MouseDown(object sender, MouseEventArgs e)
+        {
+            // Evita a movimentação do cursor ao clicar com o mouse
+            txtSenha.SelectionStart = txtSenha.Text.Length;
+        }
+
+        private void txtSenha_MouseMove(object sender, MouseEventArgs e)
+        {
+            // Evita selecionar o texto com o mouse
+            txtSenha.SelectionLength = 0;
         }
     }
 }

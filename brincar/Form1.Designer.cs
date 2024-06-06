@@ -108,7 +108,6 @@
             this.lblNomeFuncionario.Size = new System.Drawing.Size(248, 37);
             this.lblNomeFuncionario.TabIndex = 14;
             this.lblNomeFuncionario.Text = "Nome Completo";
-            this.lblNomeFuncionario.Click += new System.EventHandler(this.lblNomeFuncionario_Click);
             // 
             // btnLupa
             // 
@@ -279,7 +278,7 @@
             this.num0.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.num0.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.num0.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.num0.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.num0.Font = new System.Drawing.Font("Montserrat", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.num0.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.num0.Location = new System.Drawing.Point(155, 290);
             this.num0.Name = "num0";
@@ -296,7 +295,7 @@
             this.num3.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.num3.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.num3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.num3.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.num3.Font = new System.Drawing.Font("Montserrat", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.num3.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.num3.Location = new System.Drawing.Point(293, 202);
             this.num3.Name = "num3";
@@ -313,7 +312,7 @@
             this.num2.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.num2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.num2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.num2.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.num2.Font = new System.Drawing.Font("Montserrat", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.num2.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.num2.Location = new System.Drawing.Point(155, 202);
             this.num2.Name = "num2";
@@ -330,7 +329,7 @@
             this.num1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.num1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.num1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.num1.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.num1.Font = new System.Drawing.Font("Montserrat", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.num1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.num1.Location = new System.Drawing.Point(17, 202);
             this.num1.Name = "num1";
@@ -347,7 +346,7 @@
             this.num6.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.num6.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.num6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.num6.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.num6.Font = new System.Drawing.Font("Montserrat", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.num6.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.num6.Location = new System.Drawing.Point(293, 112);
             this.num6.Name = "num6";
@@ -364,7 +363,7 @@
             this.num5.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.num5.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.num5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.num5.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.num5.Font = new System.Drawing.Font("Montserrat", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.num5.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.num5.Location = new System.Drawing.Point(155, 112);
             this.num5.Name = "num5";
@@ -381,7 +380,7 @@
             this.num4.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.num4.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.num4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.num4.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.num4.Font = new System.Drawing.Font("Montserrat", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.num4.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.num4.Location = new System.Drawing.Point(17, 112);
             this.num4.Name = "num4";
@@ -399,7 +398,7 @@
             this.num9.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.num9.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.num9.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.num9.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.num9.Font = new System.Drawing.Font("Montserrat", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.num9.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.num9.Location = new System.Drawing.Point(293, 22);
             this.num9.Name = "num9";
@@ -416,7 +415,7 @@
             this.num8.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.num8.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.num8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.num8.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.num8.Font = new System.Drawing.Font("Montserrat", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.num8.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.num8.Location = new System.Drawing.Point(155, 22);
             this.num8.Name = "num8";
@@ -435,9 +434,9 @@
             this.num7.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.num7.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.num7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.num7.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.num7.Font = new System.Drawing.Font("Montserrat", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.num7.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.num7.Location = new System.Drawing.Point(17, 20);
+            this.num7.Location = new System.Drawing.Point(17, 22);
             this.num7.Name = "num7";
             this.num7.Size = new System.Drawing.Size(111, 68);
             this.num7.TabIndex = 0;
@@ -518,29 +517,34 @@
             // 
             // txtId
             // 
-            this.txtId.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Bold);
+            this.txtId.Font = new System.Drawing.Font("Montserrat", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtId.Location = new System.Drawing.Point(65, 106);
             this.txtId.Mask = "00000";
             this.txtId.Name = "txtId";
             this.txtId.PromptChar = ' ';
-            this.txtId.Size = new System.Drawing.Size(136, 37);
+            this.txtId.Size = new System.Drawing.Size(136, 40);
             this.txtId.TabIndex = 22;
             this.txtId.ValidatingType = typeof(int);
             this.txtId.Click += new System.EventHandler(this.txtId_Click);
             this.txtId.TextChanged += new System.EventHandler(this.txtId_TextChanged);
             this.txtId.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtId_KeyDown);
+            this.txtId.MouseDown += new System.Windows.Forms.MouseEventHandler(this.txtId_MouseDown);
+            this.txtId.MouseMove += new System.Windows.Forms.MouseEventHandler(this.txtId_MouseMove);
             // 
             // txtSenha
             // 
-            this.txtSenha.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Bold);
+            this.txtSenha.Font = new System.Drawing.Font("Montserrat", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSenha.Location = new System.Drawing.Point(65, 201);
+            this.txtSenha.Mask = "&&&&&&&&&&";
             this.txtSenha.Name = "txtSenha";
             this.txtSenha.PromptChar = ' ';
-            this.txtSenha.Size = new System.Drawing.Size(136, 37);
+            this.txtSenha.Size = new System.Drawing.Size(136, 40);
             this.txtSenha.TabIndex = 23;
             this.txtSenha.UseSystemPasswordChar = true;
             this.txtSenha.Click += new System.EventHandler(this.txtSenha_Click);
             this.txtSenha.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtSenha_KeyDown);
+            this.txtSenha.MouseDown += new System.Windows.Forms.MouseEventHandler(this.txtSenha_MouseDown);
+            this.txtSenha.MouseMove += new System.Windows.Forms.MouseEventHandler(this.txtSenha_MouseMove);
             // 
             // Form1
             // 
