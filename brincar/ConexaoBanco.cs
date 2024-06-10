@@ -266,7 +266,7 @@ namespace Ponto
                 DataSet dataset = new DataSet();
                 data.Fill(dataset, "FUNCIONARIO");
 
-                MessageBox.Show("Funcionário Cadastrado - Código: " + dataset.Tables["FUNCIONARIO"].Rows[0]["ID"].ToString(), "Sucesso!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Funcionário Cadastrado - ID: " + dataset.Tables["FUNCIONARIO"].Rows[0]["ID"].ToString(), "Sucesso!", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             }
             else

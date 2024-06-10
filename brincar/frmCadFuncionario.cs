@@ -73,7 +73,7 @@ namespace Ponto
                 }
                 else
                 {
-                    if (MessageBox.Show($"Esse e-mail será usado para recuperar a sua senha futuramente, ele está correto? >> {txtEmail.Text} <<", "Confirme seu e-mail", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    if (MessageBox.Show($"Esse e-mail será usado para recuperar a sua senha futuramente, ele está correto? >>{txtEmail.Text}<<", "Confirme seu e-mail", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     {
                         conexaoBanco.SalvarCadastro(txtNome.Text, txtSenha.Text, txtEmail.Text);
 

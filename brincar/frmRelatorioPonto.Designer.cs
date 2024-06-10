@@ -132,10 +132,13 @@
             // 
             // dgvConsultaPonto
             // 
+            this.dgvConsultaPonto.AllowUserToAddRows = false;
+            this.dgvConsultaPonto.AllowUserToDeleteRows = false;
             this.dgvConsultaPonto.BackgroundColor = System.Drawing.Color.White;
             this.dgvConsultaPonto.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvConsultaPonto.Location = new System.Drawing.Point(12, 44);
             this.dgvConsultaPonto.Name = "dgvConsultaPonto";
+            this.dgvConsultaPonto.ReadOnly = true;
             this.dgvConsultaPonto.RowHeadersWidth = 51;
             this.dgvConsultaPonto.Size = new System.Drawing.Size(760, 476);
             this.dgvConsultaPonto.TabIndex = 36;
