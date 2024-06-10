@@ -105,7 +105,6 @@ namespace Ponto
             if (activeTextBox == txtId)
             {
                 txtId_KeyDown(sender, new KeyEventArgs(Keys.Enter));
-                activeTextBox = txtSenha;
             }
             else
             {
