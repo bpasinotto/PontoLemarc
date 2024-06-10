@@ -104,7 +104,7 @@ namespace Ponto
         {
             if (activeTextBox == txtId)
             {
-                txtId_KeyDown(sender, new KeyEventArgs(Keys.Enter));
+                txtId_KeyDown(sender, new KeyEventArgs(Keys.Enter));                
             }
             else
             {
