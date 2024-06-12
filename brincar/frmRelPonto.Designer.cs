@@ -38,7 +38,7 @@
             // 
             this.crystalReportViewer1.ActiveViewIndex = -1;
             this.crystalReportViewer1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.crystalReportViewer1.Cursor = System.Windows.Forms.Cursors.WaitCursor;
+            this.crystalReportViewer1.Cursor = System.Windows.Forms.Cursors.Default;
             this.crystalReportViewer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.crystalReportViewer1.Location = new System.Drawing.Point(0, 0);
             this.crystalReportViewer1.Margin = new System.Windows.Forms.Padding(2);
@@ -55,6 +55,7 @@
             this.ClientSize = new System.Drawing.Size(784, 561);
             this.Controls.Add(this.crystalReportViewer1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmRelPonto";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;

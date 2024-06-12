@@ -106,7 +106,7 @@ namespace Ponto
                 cr.SetDataSource(ds);
                 fm.crystalReportViewer1.ReportSource = cr;
                 fm.crystalReportViewer1.Refresh();
-                fm.Show();
+                fm.ShowDialog();
             }
                         
         }
@@ -119,7 +119,7 @@ namespace Ponto
             if(dgvConsultaPonto.DataSource != null)
             {
                 frmGrafico fm = new frmGrafico(cbFuncionario.Text, dataInicial, dataFinal);
-                fm.Show();
+                fm.ShowDialog();
             }
             else
             {
