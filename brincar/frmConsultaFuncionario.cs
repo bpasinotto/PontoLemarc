@@ -12,7 +12,7 @@ namespace Ponto
 {
     public partial class frmConsultaFuncionario : Form
     {
-        string Id, Nome;
+        string Id, Nome, Email;
         ConexaoBanco conexaoBanco = new ConexaoBanco();
 
         public frmConsultaFuncionario()
@@ -85,7 +85,7 @@ namespace Ponto
         private void funcionarioDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             Id = funcionarioDataGridView.Rows[funcionarioDataGridView.CurrentRow.Index].Cells[0].Value.ToString();
-            Nome = funcionarioDataGridView.Rows[funcionarioDataGridView.CurrentRow.Index].Cells[1].Value.ToString();
+            Nome = funcionarioDataGridView.Rows[funcionarioDataGridView.CurrentRow.Index].Cells[1].Value.ToString();            
         }
     }
 }

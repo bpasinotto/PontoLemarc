@@ -73,7 +73,7 @@ public class GerenciadorDeSenha
             mailMessage.From = new MailAddress("bruno_pasinotto@hotmail.com"); // Seu endereço de e-mail
             mailMessage.To.Add(email); // E-mail do destinatário
             mailMessage.Subject = "Redefinição de senha"; // Assunto do e-mail
-            mailMessage.Body = "Sua nova senha é: " + novaSenha; // Corpo do e-mail
+            mailMessage.Body = "No campo 'Senha recebida por e-mail' digite: " + novaSenha; // Corpo do e-mail
 
             // Envio do e-mail
             smtpClient.Send(mailMessage);

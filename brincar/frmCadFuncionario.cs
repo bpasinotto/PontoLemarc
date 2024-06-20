@@ -32,18 +32,24 @@ namespace Ponto
 
 
         private void frmCadFuncionario_Load(object sender, EventArgs e)
-        {             
+        {
             if (Nome != null)
             {
-                txtNome.Text = Nome;                
-                txtSenha.Visible = false;
-                btnVerSenha.Visible = false;
-                txtEmail.Visible = false;
-                lblEmail.Visible = false;
-                lblSenha.Visible = false;
+                this.Text = "Alterar Cadastro";
+                txtNome.Text = Nome;
+                txtNome.Enabled = false;
+                txtSenha.Text = "******";
+                txtSenha.Enabled = false;
+                btnVerSenha.Enabled = false;                
+                txtEmail.Enabled = false;
+
+                var email = conexaoBanco.LocalizarEmailPorId(Id).Split('@');
+                txtEmail.Text = email[0] + " * * * * *";
             }
             else
-            {
+            {                
+                lblAlterarNome.Visible = false;
+                lblAlterarEmail.Visible = false;
                 lblAlterarSenha.Visible = false;
             }
 
@@ -57,7 +63,7 @@ namespace Ponto
 
         private void btnSalvar_Click(object sender, EventArgs e)
         {
-            if (txtSenha.Visible == true) //Novo cadastro
+            if (txtSenha.Enabled == true) //Novo cadastro
             {
                 if (txtNome.TextLength < 3)
                 {
@@ -81,27 +87,50 @@ namespace Ponto
                         txtSenha.Text = "";
                         txtEmail.Text = "";
                         txtNome.Focus();
-                    }                  
+                    }
 
                 }
             }
             else //Alterar cadastro
             {
-                if (txtNome.TextLength < 3)
+                if (txtNome.Enabled)
                 {
-                    MessageBox.Show("Preencha o campo Nome com no mínimo 3 letras", "Nome", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    if (txtNome.TextLength < 3)
+                    {
+                        MessageBox.Show("Preencha o campo Nome com no mínimo 3 letras", "Nome", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                    else
+                    {
+                        conexaoBanco.SalvarNome(Id, txtNome.Text);
+                        txtNome.Enabled = false;
+                    }
                 }
-                else
+
+
+                if (txtEmail.Enabled)
                 {
-                    conexaoBanco.AlterarCadastro(Id, txtNome.Text);
-                    Close();
+                    if (EmailValido(txtEmail.Text) == false)
+                    {
+                        MessageBox.Show("O endereço de e-mail é inválido", "Email", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                    else
+                    {  
+                        if (MessageBox.Show($"Esse e-mail será usado para recuperar a sua senha futuramente, ele está correto? >>{txtEmail.Text}<<", "Confirme seu e-mail", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                        {
+                            conexaoBanco.SalvarEmail(Id, txtEmail.Text);
+
+                            txtEmail.Enabled = false;                            
+                        }
+                    }
                 }
+                
+
             }
-                        
+
         }
 
         private static bool EmailValido(string email)
-        {  
+        {
             // Define a expressão regular para validar o formato do e-mail
             string pattern = @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
 
@@ -111,7 +140,7 @@ namespace Ponto
 
         private void txtEmail_Enter(object sender, EventArgs e)
         {
-            if(txtEmail.Text == "Usado para redefinir a senha")
+            if (txtEmail.Text == "Usado para redefinir a senha")
             {
                 txtEmail.Text = "";
                 txtEmail.ForeColor = Color.Black;
@@ -120,7 +149,7 @@ namespace Ponto
 
         private void txtEmail_Leave(object sender, EventArgs e)
         {
-            if(txtEmail.Text == "")
+            if (txtEmail.Text == "")
             {
                 txtEmail.Text = "Usado para redefinir a senha";
                 txtEmail.ForeColor = Color.LightGray;
@@ -131,6 +160,26 @@ namespace Ponto
         {
             frmEmailRecuperacao frmEmailRecuperacao = new frmEmailRecuperacao(Id);
             frmEmailRecuperacao.ShowDialog();
+        }
+
+        private void lblAlterarNome_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            frmSenhaDoAdmin senhaDoAdmin = new frmSenhaDoAdmin();            
+            if (senhaDoAdmin.ShowDialog() == DialogResult.OK)
+            {
+                txtNome.Enabled = true;
+            } 
+        }
+
+        private void lblAlterarEmail_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            frmSenhaDoAdmin senhaDoAdmin = new frmSenhaDoAdmin();
+            if (senhaDoAdmin.ShowDialog() == DialogResult.OK)
+            {
+                txtEmail.Enabled = true;
+                txtEmail.ForeColor = Color.Black;
+                txtEmail.Text = conexaoBanco.LocalizarEmailPorId(Id);
+            }
         }
 
         private void btnVerSenha_Click(object sender, EventArgs e)
@@ -145,6 +194,6 @@ namespace Ponto
             }
         }
 
-        
+
     }
 }

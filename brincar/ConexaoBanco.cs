@@ -239,6 +239,18 @@ namespace Ponto
             }
         }
 
+        public bool ValidarSenhaAdmin(string id, string senha)
+        {
+            comando = new FbCommand($"SELECT * FROM FUNCIONARIO WHERE ID = {id}", con);
+            FbDataAdapter data = new FbDataAdapter(comando);
+            DataSet dataset = new DataSet();
+            con.Open();
+            data.Fill(dataset, "FUNCIONARIO");
+            con.Close();
+
+            return GerenciadorDeSenha.VerificarSenha(senha, dataset.Tables["FUNCIONARIO"].Rows[0]["SENHA"].ToString());                       
+        }
+
         public int InserirSenhaGerada(string id, string senha)
         {
             // Faz o hash da senha antes de armazenar
@@ -278,7 +290,7 @@ namespace Ponto
 
         }
 
-        public void AlterarCadastro(string id, string nome)
+        public void SalvarNome(string id, string nome)
         {
             comando = new FbCommand($"UPDATE FUNCIONARIO SET NOME = '{nome}' WHERE ID = {id}", con);
             con.Open();
@@ -290,6 +302,22 @@ namespace Ponto
             else
             {
                 MessageBox.Show("Erro ao alterar nome do Funcionário", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            con.Close();
+        }
+
+        public void SalvarEmail(string id, string email)
+        {
+            comando = new FbCommand($"UPDATE FUNCIONARIO SET EMAIL = '{email}' WHERE ID = {id}", con);
+            con.Open();
+
+            if (comando.ExecuteNonQuery() == 1)
+            {
+                MessageBox.Show("E-mail do Funcionário alterado", "Sucesso!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("Erro ao alterar o e-mail do Funcionário", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             con.Close();
         }
