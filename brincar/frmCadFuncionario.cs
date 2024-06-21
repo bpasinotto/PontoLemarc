@@ -39,9 +39,9 @@ namespace Ponto
                 MessageBox.Show("O primeiro cadastro será o Administrador do sistema, guarde bem a sua senha", "Atenção!", MessageBoxButtons.OK, MessageBoxIcon.Warning);                
             }
 
-            if (Nome != null)
-            {
-                this.Text = "Alterar Cadastro";
+            if (Nome != null) //Alterando um cadastro
+            {                
+                this.Text = "Alterar Cadastro";                
                 txtNome.Text = Nome;
                 txtNome.Enabled = false;
                 txtSenha.Text = "******";
@@ -51,9 +51,14 @@ namespace Ponto
 
                 var email = conexaoBanco.LocalizarEmailPorId(Id).Split('@');
                 txtEmail.Text = email[0] + " * * * * *";
+
+                if (conexaoBanco.VerificarCadastroAtivo(Id) == 0)
+                {
+                    lblDesativarCadastro.Text = "Ativar Cadastro";
+                }
             }
-            else
-            {
+            else //Cadastrando um novo funcionário
+            {                
                 lblAlterarNome.Visible = false;
                 lblAlterarEmail.Visible = false;
                 lblAlterarSenha.Visible = false;
@@ -194,11 +199,25 @@ namespace Ponto
             frmSenhaDoAdmin senhaDoAdmin = new frmSenhaDoAdmin();
             if (senhaDoAdmin.ShowDialog() == DialogResult.OK)
             {
-                if(conexaoBanco.DesativarCadastro(Id) == 1)
+                if (lblDesativarCadastro.Text == "Ativar Cadastro")
                 {
-                    MessageBox.Show("Cadastro desativado", "Desativado", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    this.Close();
+                    if (conexaoBanco.DesativarCadastro(Id, 1) == 1)
+                    {
+                        MessageBox.Show("Cadastro Ativado!", "Ativado", MessageBoxButtons.OK, MessageBoxIcon.Information);                        
+                    }
+
+                    lblDesativarCadastro.Text = "Desativar Cadastro";
                 }
+                else
+                {
+                    if (conexaoBanco.DesativarCadastro(Id, 0) == 1)
+                    {
+                        MessageBox.Show("Cadastro Desativado!", "Desativado", MessageBoxButtons.OK, MessageBoxIcon.Information);                        
+                    }
+
+                    lblDesativarCadastro.Text = "Ativar Cadastro";
+                }
+                
             }
         }
 

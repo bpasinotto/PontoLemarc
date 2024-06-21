@@ -146,6 +146,18 @@ namespace Ponto
             return dataset;
         }
 
+        public int VerificarCadastroAtivo(string id)
+        {
+            comando = new FbCommand($"SELECT ATIVO FROM FUNCIONARIO WHERE ID = {id}", con);
+            FbDataAdapter data = new FbDataAdapter(comando);
+            DataSet dataset = new DataSet();
+            con.Open();
+            data.Fill(dataset, "FUNCIONARIO");
+            int ativo = int.Parse(dataset.Tables["FUNCIONARIO"].Rows[0]["ATIVO"].ToString());
+            con.Close();
+            return ativo;
+        }
+
         public string LocalizarEmailPorId(string id)
         {
             comando = new FbCommand($"SELECT EMAIL FROM FUNCIONARIO WHERE ID = {id}", con);
@@ -322,10 +334,10 @@ namespace Ponto
             con.Close();
         }
 
-        public int DesativarCadastro(string id)
+        public int DesativarCadastro(string id, int ativo)
         {
             
-            comando = new FbCommand($"UPDATE FUNCIONARIO SET ATIVO = 0 WHERE ID = {id}", con);
+            comando = new FbCommand($"UPDATE FUNCIONARIO SET ATIVO = {ativo} WHERE ID = {id}", con);
             con.Open();
             int i = comando.ExecuteNonQuery();
             con.Close();
