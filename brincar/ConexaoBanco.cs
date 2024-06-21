@@ -135,9 +135,9 @@ namespace Ponto
             return dataset;
         }
 
-        public DataSet ProcurarFuncionarioNome(string nome)
+        public DataSet ProcurarFuncionarioNome(string nome, int ativo)
         {
-            comando = new FbCommand("SELECT ID, NOME FROM FUNCIONARIO WHERE NOME LIKE '%" + nome + "%'", con);
+            comando = new FbCommand($"SELECT ID, NOME FROM FUNCIONARIO WHERE NOME LIKE '%{nome}%' AND ATIVO = {ativo}", con);
             FbDataAdapter data = new FbDataAdapter(comando);
             DataSet dataset = new DataSet();
             con.Open();
@@ -320,6 +320,16 @@ namespace Ponto
                 MessageBox.Show("Erro ao alterar o e-mail do Funcionário", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             con.Close();
+        }
+
+        public int DesativarCadastro(string id)
+        {
+            
+            comando = new FbCommand($"UPDATE FUNCIONARIO SET ATIVO = 0 WHERE ID = {id}", con);
+            con.Open();
+            int i = comando.ExecuteNonQuery();
+            con.Close();
+            return i;
         }
 
         public void InserirHora(string id)

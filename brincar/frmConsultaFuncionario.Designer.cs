@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.funcionarioDataGridView = new System.Windows.Forms.DataGridView();
             this.btnFechar = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -35,6 +36,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.txtBarraDeBusca = new System.Windows.Forms.TextBox();
             this.btnAlterar = new System.Windows.Forms.Button();
+            this.cbAtivo = new System.Windows.Forms.CheckBox();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.funcionarioDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -104,7 +107,7 @@
             this.txtBarraDeBusca.Location = new System.Drawing.Point(143, 10);
             this.txtBarraDeBusca.Margin = new System.Windows.Forms.Padding(2);
             this.txtBarraDeBusca.Name = "txtBarraDeBusca";
-            this.txtBarraDeBusca.Size = new System.Drawing.Size(435, 24);
+            this.txtBarraDeBusca.Size = new System.Drawing.Size(359, 24);
             this.txtBarraDeBusca.TabIndex = 8;
             this.txtBarraDeBusca.TextChanged += new System.EventHandler(this.txtBarraDeBusca_TextChanged);
             // 
@@ -119,6 +122,27 @@
             this.btnAlterar.UseVisualStyleBackColor = true;
             this.btnAlterar.Click += new System.EventHandler(this.btnAlterar_Click);
             // 
+            // cbAtivo
+            // 
+            this.cbAtivo.AccessibleDescription = "";
+            this.cbAtivo.AutoSize = true;
+            this.cbAtivo.BackColor = System.Drawing.SystemColors.HotTrack;
+            this.cbAtivo.Checked = true;
+            this.cbAtivo.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbAtivo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cbAtivo.Font = new System.Drawing.Font("Montserrat Medium", 9.749999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbAtivo.ForeColor = System.Drawing.Color.White;
+            this.cbAtivo.Location = new System.Drawing.Point(517, 12);
+            this.cbAtivo.Name = "cbAtivo";
+            this.cbAtivo.Size = new System.Drawing.Size(65, 22);
+            this.cbAtivo.TabIndex = 10;
+            this.cbAtivo.Tag = "";
+            this.cbAtivo.Text = "Ativos";
+            this.toolTip1.SetToolTip(this.cbAtivo, "Quando marcado mostra apenas os cadastros dos funcionários que estão Ativos no si" +
+        "stema. Quando desmarcado mostra apenas os cadastros Desativados.");
+            this.cbAtivo.UseVisualStyleBackColor = false;
+            this.cbAtivo.CheckedChanged += new System.EventHandler(this.cbAtivo_CheckedChanged);
+            // 
             // frmConsultaFuncionario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -126,13 +150,14 @@
             this.BackColor = System.Drawing.SystemColors.HotTrack;
             this.ClientSize = new System.Drawing.Size(589, 319);
             this.ControlBox = false;
+            this.Controls.Add(this.cbAtivo);
+            this.Controls.Add(this.funcionarioDataGridView);
             this.Controls.Add(this.btnAlterar);
             this.Controls.Add(this.txtBarraDeBusca);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.btnCadastrar);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnFechar);
-            this.Controls.Add(this.funcionarioDataGridView);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "frmConsultaFuncionario";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
@@ -152,5 +177,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtBarraDeBusca;
         private System.Windows.Forms.Button btnAlterar;
+        private System.Windows.Forms.CheckBox cbAtivo;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }

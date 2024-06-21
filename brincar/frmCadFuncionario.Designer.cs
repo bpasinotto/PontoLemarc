@@ -34,15 +34,16 @@ namespace Ponto
             this.txtNome = new System.Windows.Forms.TextBox();
             this.txtSenha = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lblDesativarCadastro = new System.Windows.Forms.LinkLabel();
             this.lblAlterarEmail = new System.Windows.Forms.LinkLabel();
             this.lblAlterarNome = new System.Windows.Forms.LinkLabel();
             this.lblAlterarSenha = new System.Windows.Forms.LinkLabel();
             this.lblEmail = new System.Windows.Forms.Label();
             this.txtEmail = new System.Windows.Forms.TextBox();
+            this.btnVerSenha = new System.Windows.Forms.Button();
             this.lblSenha = new System.Windows.Forms.Label();
             this.btnSalvar = new System.Windows.Forms.Button();
             this.btnFechar = new System.Windows.Forms.Button();
-            this.btnVerSenha = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -78,6 +79,8 @@ namespace Ponto
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.txtSenha);
+            this.groupBox1.Controls.Add(this.lblDesativarCadastro);
             this.groupBox1.Controls.Add(this.lblAlterarEmail);
             this.groupBox1.Controls.Add(this.lblAlterarNome);
             this.groupBox1.Controls.Add(this.lblAlterarSenha);
@@ -86,7 +89,6 @@ namespace Ponto
             this.groupBox1.Controls.Add(this.btnVerSenha);
             this.groupBox1.Controls.Add(this.lblSenha);
             this.groupBox1.Controls.Add(this.nomeLabel1);
-            this.groupBox1.Controls.Add(this.txtSenha);
             this.groupBox1.Controls.Add(this.txtNome);
             this.groupBox1.Location = new System.Drawing.Point(43, 28);
             this.groupBox1.Name = "groupBox1";
@@ -94,12 +96,26 @@ namespace Ponto
             this.groupBox1.TabIndex = 26;
             this.groupBox1.TabStop = false;
             // 
+            // lblDesativarCadastro
+            // 
+            this.lblDesativarCadastro.AutoSize = true;
+            this.lblDesativarCadastro.Font = new System.Drawing.Font("Montserrat Medium", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDesativarCadastro.LinkColor = System.Drawing.Color.White;
+            this.lblDesativarCadastro.Location = new System.Drawing.Point(342, 152);
+            this.lblDesativarCadastro.Name = "lblDesativarCadastro";
+            this.lblDesativarCadastro.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.lblDesativarCadastro.Size = new System.Drawing.Size(154, 21);
+            this.lblDesativarCadastro.TabIndex = 32;
+            this.lblDesativarCadastro.TabStop = true;
+            this.lblDesativarCadastro.Text = "Desativar Cadastro";
+            this.lblDesativarCadastro.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lblDesativarCadastro_LinkClicked);
+            // 
             // lblAlterarEmail
             // 
             this.lblAlterarEmail.AutoSize = true;
             this.lblAlterarEmail.Font = new System.Drawing.Font("Montserrat Medium", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblAlterarEmail.LinkColor = System.Drawing.Color.White;
-            this.lblAlterarEmail.Location = new System.Drawing.Point(91, 123);
+            this.lblAlterarEmail.Location = new System.Drawing.Point(91, 121);
             this.lblAlterarEmail.Name = "lblAlterarEmail";
             this.lblAlterarEmail.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.lblAlterarEmail.Size = new System.Drawing.Size(107, 21);
@@ -113,7 +129,7 @@ namespace Ponto
             this.lblAlterarNome.AutoSize = true;
             this.lblAlterarNome.Font = new System.Drawing.Font("Montserrat Medium", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblAlterarNome.LinkColor = System.Drawing.Color.White;
-            this.lblAlterarNome.Location = new System.Drawing.Point(91, 64);
+            this.lblAlterarNome.Location = new System.Drawing.Point(91, 62);
             this.lblAlterarNome.Name = "lblAlterarNome";
             this.lblAlterarNome.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.lblAlterarNome.Size = new System.Drawing.Size(111, 21);
@@ -127,7 +143,7 @@ namespace Ponto
             this.lblAlterarSenha.AutoSize = true;
             this.lblAlterarSenha.Font = new System.Drawing.Font("Montserrat Medium", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblAlterarSenha.LinkColor = System.Drawing.Color.White;
-            this.lblAlterarSenha.Location = new System.Drawing.Point(359, 152);
+            this.lblAlterarSenha.Location = new System.Drawing.Point(91, 177);
             this.lblAlterarSenha.Name = "lblAlterarSenha";
             this.lblAlterarSenha.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.lblAlterarSenha.Size = new System.Drawing.Size(111, 21);
@@ -159,6 +175,25 @@ namespace Ponto
             this.txtEmail.Text = "Usado para redefinir a senha";
             this.txtEmail.Enter += new System.EventHandler(this.txtEmail_Enter);
             this.txtEmail.Leave += new System.EventHandler(this.txtEmail_Leave);
+            // 
+            // btnVerSenha
+            // 
+            this.btnVerSenha.BackColor = System.Drawing.Color.Transparent;
+            this.btnVerSenha.BackgroundImage = global::Ponto.Properties.Resources.olho;
+            this.btnVerSenha.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnVerSenha.FlatAppearance.BorderSize = 0;
+            this.btnVerSenha.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
+            this.btnVerSenha.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnVerSenha.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnVerSenha.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnVerSenha.ForeColor = System.Drawing.Color.White;
+            this.btnVerSenha.Location = new System.Drawing.Point(302, 147);
+            this.btnVerSenha.Name = "btnVerSenha";
+            this.btnVerSenha.Size = new System.Drawing.Size(30, 31);
+            this.btnVerSenha.TabIndex = 27;
+            this.btnVerSenha.TabStop = false;
+            this.btnVerSenha.UseVisualStyleBackColor = false;
+            this.btnVerSenha.Click += new System.EventHandler(this.btnVerSenha_Click);
             // 
             // lblSenha
             // 
@@ -195,25 +230,6 @@ namespace Ponto
             this.btnFechar.UseVisualStyleBackColor = true;
             this.btnFechar.Click += new System.EventHandler(this.btnFechar_Click);
             // 
-            // btnVerSenha
-            // 
-            this.btnVerSenha.BackColor = System.Drawing.Color.Transparent;
-            this.btnVerSenha.BackgroundImage = global::Ponto.Properties.Resources.olho;
-            this.btnVerSenha.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnVerSenha.FlatAppearance.BorderSize = 0;
-            this.btnVerSenha.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
-            this.btnVerSenha.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.btnVerSenha.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnVerSenha.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnVerSenha.ForeColor = System.Drawing.Color.White;
-            this.btnVerSenha.Location = new System.Drawing.Point(302, 147);
-            this.btnVerSenha.Name = "btnVerSenha";
-            this.btnVerSenha.Size = new System.Drawing.Size(30, 31);
-            this.btnVerSenha.TabIndex = 27;
-            this.btnVerSenha.TabStop = false;
-            this.btnVerSenha.UseVisualStyleBackColor = false;
-            this.btnVerSenha.Click += new System.EventHandler(this.btnVerSenha_Click);
-            // 
             // frmCadFuncionario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -249,5 +265,6 @@ namespace Ponto
         private System.Windows.Forms.LinkLabel lblAlterarSenha;
         private System.Windows.Forms.LinkLabel lblAlterarEmail;
         private System.Windows.Forms.LinkLabel lblAlterarNome;
+        private System.Windows.Forms.LinkLabel lblDesativarCadastro;
     }
 }

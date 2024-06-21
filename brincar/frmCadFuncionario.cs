@@ -26,13 +26,19 @@ namespace Ponto
         public frmCadFuncionario(string id, string nome)
         {
             Id = id;
-            Nome = nome;            
+            Nome = nome;
             InitializeComponent();
         }
 
 
         private void frmCadFuncionario_Load(object sender, EventArgs e)
         {
+            var t = conexaoBanco.ConsultarPorId("1").Tables["FUNCIONARIO"].Rows.Count;
+            if (t == 0)
+            {
+                MessageBox.Show("O primeiro cadastro será o Administrador do sistema, guarde bem a sua senha", "Atenção!", MessageBoxButtons.OK, MessageBoxIcon.Warning);                
+            }
+
             if (Nome != null)
             {
                 this.Text = "Alterar Cadastro";
@@ -40,17 +46,18 @@ namespace Ponto
                 txtNome.Enabled = false;
                 txtSenha.Text = "******";
                 txtSenha.Enabled = false;
-                btnVerSenha.Enabled = false;                
+                btnVerSenha.Enabled = false;
                 txtEmail.Enabled = false;
 
                 var email = conexaoBanco.LocalizarEmailPorId(Id).Split('@');
                 txtEmail.Text = email[0] + " * * * * *";
             }
             else
-            {                
+            {
                 lblAlterarNome.Visible = false;
                 lblAlterarEmail.Visible = false;
                 lblAlterarSenha.Visible = false;
+                lblDesativarCadastro.Visible = false;
             }
 
         }
@@ -114,16 +121,16 @@ namespace Ponto
                         MessageBox.Show("O endereço de e-mail é inválido", "Email", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                     else
-                    {  
+                    {
                         if (MessageBox.Show($"Esse e-mail será usado para recuperar a sua senha futuramente, ele está correto? >>{txtEmail.Text}<<", "Confirme seu e-mail", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                         {
                             conexaoBanco.SalvarEmail(Id, txtEmail.Text);
 
-                            txtEmail.Enabled = false;                            
+                            txtEmail.Enabled = false;
                         }
                     }
                 }
-                
+
 
             }
 
@@ -164,11 +171,11 @@ namespace Ponto
 
         private void lblAlterarNome_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            frmSenhaDoAdmin senhaDoAdmin = new frmSenhaDoAdmin();            
+            frmSenhaDoAdmin senhaDoAdmin = new frmSenhaDoAdmin();
             if (senhaDoAdmin.ShowDialog() == DialogResult.OK)
             {
                 txtNome.Enabled = true;
-            } 
+            }
         }
 
         private void lblAlterarEmail_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -179,6 +186,19 @@ namespace Ponto
                 txtEmail.Enabled = true;
                 txtEmail.ForeColor = Color.Black;
                 txtEmail.Text = conexaoBanco.LocalizarEmailPorId(Id);
+            }
+        }
+
+        private void lblDesativarCadastro_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            frmSenhaDoAdmin senhaDoAdmin = new frmSenhaDoAdmin();
+            if (senhaDoAdmin.ShowDialog() == DialogResult.OK)
+            {
+                if(conexaoBanco.DesativarCadastro(Id) == 1)
+                {
+                    MessageBox.Show("Cadastro desativado", "Desativado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.Close();
+                }
             }
         }
 

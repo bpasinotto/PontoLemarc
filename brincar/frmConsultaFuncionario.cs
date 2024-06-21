@@ -56,7 +56,12 @@ namespace Ponto
 
             if (txtBarraDeBusca.Text != "")
             {
-                funcionarioDataGridView.DataSource = conexaoBanco.ProcurarFuncionarioNome(txtBarraDeBusca.Text);
+                int ativo = 0;
+                if (cbAtivo.Checked == true)
+                {
+                    ativo = 1;
+                }
+                funcionarioDataGridView.DataSource = conexaoBanco.ProcurarFuncionarioNome(txtBarraDeBusca.Text, ativo);
                 funcionarioDataGridView.DataMember = "FUNCIONARIO";
                 funcionarioDataGridView.Font = new Font("Montserrat SemiBold", 10, FontStyle.Bold);
                 funcionarioDataGridView.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
@@ -65,6 +70,19 @@ namespace Ponto
             {
                 funcionarioDataGridView.DataSource = null;
             }
+        }
+
+        private void cbAtivo_CheckedChanged(object sender, EventArgs e)
+        {
+            int ativo = 0;
+            if (cbAtivo.Checked == true)
+            {
+                ativo = 1;
+            }
+            funcionarioDataGridView.DataSource = conexaoBanco.ProcurarFuncionarioNome(txtBarraDeBusca.Text, ativo);
+            funcionarioDataGridView.DataMember = "FUNCIONARIO";
+            funcionarioDataGridView.Font = new Font("Montserrat SemiBold", 10, FontStyle.Bold);
+            funcionarioDataGridView.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
         }
 
         private void btnAlterar_Click(object sender, EventArgs e)
