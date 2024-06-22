@@ -39,6 +39,7 @@
             this.dgvConsultaPonto = new System.Windows.Forms.DataGridView();
             this.btnImprimir = new System.Windows.Forms.Button();
             this.btnGrafico = new System.Windows.Forms.Button();
+            this.cbAtivo = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvConsultaPonto)).BeginInit();
             this.SuspendLayout();
             // 
@@ -167,6 +168,25 @@
             this.btnGrafico.UseVisualStyleBackColor = true;
             this.btnGrafico.Click += new System.EventHandler(this.btnGrafico_Click);
             // 
+            // cbAtivo
+            // 
+            this.cbAtivo.AccessibleDescription = "";
+            this.cbAtivo.AutoSize = true;
+            this.cbAtivo.BackColor = System.Drawing.SystemColors.HotTrack;
+            this.cbAtivo.Checked = true;
+            this.cbAtivo.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbAtivo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cbAtivo.Font = new System.Drawing.Font("Montserrat SemiBold", 9.749999F, System.Drawing.FontStyle.Bold);
+            this.cbAtivo.ForeColor = System.Drawing.Color.White;
+            this.cbAtivo.Location = new System.Drawing.Point(13, 530);
+            this.cbAtivo.Name = "cbAtivo";
+            this.cbAtivo.Size = new System.Drawing.Size(158, 22);
+            this.cbAtivo.TabIndex = 39;
+            this.cbAtivo.Tag = "";
+            this.cbAtivo.Text = "Funcionários Ativos";
+            this.cbAtivo.UseVisualStyleBackColor = false;
+            this.cbAtivo.CheckedChanged += new System.EventHandler(this.cbAtivo_CheckedChanged);
+            // 
             // frmRelatorioPonto
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -174,6 +194,7 @@
             this.BackColor = System.Drawing.SystemColors.HotTrack;
             this.ClientSize = new System.Drawing.Size(784, 561);
             this.ControlBox = false;
+            this.Controls.Add(this.cbAtivo);
             this.Controls.Add(this.btnGrafico);
             this.Controls.Add(this.btnImprimir);
             this.Controls.Add(this.cbFuncionario);
@@ -189,6 +210,7 @@
             this.Name = "frmRelatorioPonto";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Relatório de Ponto";
+            this.Load += new System.EventHandler(this.frmRelatorioPonto_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvConsultaPonto)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -208,5 +230,6 @@
         private System.Windows.Forms.Button btnImprimir;
         private System.Windows.Forms.Button btnGrafico;
         private System.Windows.Forms.ComboBox cbFuncionario;
+        private System.Windows.Forms.CheckBox cbAtivo;
     }
 }

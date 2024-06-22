@@ -94,9 +94,9 @@ namespace Ponto
         }
 
 
-        public DataSet IdEnome()
+        public DataSet IdEnome(int ativo)
         {
-            comando = new FbCommand("SELECT ID, NOME FROM FUNCIONARIO", con);
+            comando = new FbCommand($"SELECT ID, NOME FROM FUNCIONARIO WHERE ATIVO = {ativo}", con);
             FbDataAdapter data = new FbDataAdapter(comando);
             DataSet dataset = new DataSet();
             try
@@ -118,7 +118,7 @@ namespace Ponto
 
         public DataSet ConsultarPorId(string id)
         {
-            comando = new FbCommand($"SELECT NOME FROM FUNCIONARIO WHERE ID = {id}", con);
+            comando = new FbCommand($"SELECT NOME FROM FUNCIONARIO WHERE ID = {id} AND ATIVO = 1", con);
             FbDataAdapter data = new FbDataAdapter(comando);
             DataSet dataset = new DataSet();
             try

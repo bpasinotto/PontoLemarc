@@ -23,13 +23,12 @@ namespace Ponto
         public frmRelatorioPonto()
         {
             InitializeComponent();
+        }
 
-            ConexaoBanco conexaoBanco = new ConexaoBanco();
-            //cbFuncionario.DataSource = conexaoBanco.Mostrar().Tables["FUNCIONARIO"].AsEnumerable().Select(row => row["NOME"]).ToList();
+        private void frmRelatorioPonto_Load(object sender, EventArgs e)
+        {            
             cbFuncionario.Items.Add("Todos");
-            cbFuncionario.Items.AddRange(conexaoBanco.IdEnome().Tables["FUNCIONARIO"].AsEnumerable().Select(row => row["NOME"]).ToArray());
-            
-
+            cbFuncionario.Items.AddRange(conexaoBanco.IdEnome(1).Tables["FUNCIONARIO"].AsEnumerable().Select(row => row["NOME"]).ToArray());
         }
 
         private void btnFechar_Click(object sender, EventArgs e)
@@ -127,6 +126,20 @@ namespace Ponto
             }
 
            
+        }
+
+        private void cbAtivo_CheckedChanged(object sender, EventArgs e)
+        {
+            int ativo = 0;
+            if (cbAtivo.Checked == true)
+            {
+                ativo = 1;
+            }
+            cbFuncionario.Items.Clear();
+            cbFuncionario.Items.Add("Todos");
+            cbFuncionario.Items.AddRange(conexaoBanco.IdEnome(ativo).Tables["FUNCIONARIO"].AsEnumerable().Select(row => row["NOME"]).ToArray());
+            cbFuncionario.Text = "Todos";
+            dgvConsultaPonto.DataSource = null;
         }
 
        
