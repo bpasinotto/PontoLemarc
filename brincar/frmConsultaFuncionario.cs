@@ -75,15 +75,24 @@ namespace Ponto
 
         private void cbAtivo_CheckedChanged(object sender, EventArgs e)
         {
-            int ativo = 0;
-            if (cbAtivo.Checked == true)
+            funcionarioDataGridView.DataSource = null;
+
+            if (txtBarraDeBusca.Text != "")
             {
-                ativo = 1;
+                int ativo = 0;
+                if (cbAtivo.Checked == true)
+                {
+                    ativo = 1;
+                }
+                funcionarioDataGridView.DataSource = conexaoBanco.ProcurarFuncionarioNome(txtBarraDeBusca.Text, ativo);
+                funcionarioDataGridView.DataMember = "FUNCIONARIO";
+                funcionarioDataGridView.Font = new Font("Montserrat SemiBold", 10, FontStyle.Bold);
+                funcionarioDataGridView.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
             }
-            funcionarioDataGridView.DataSource = conexaoBanco.ProcurarFuncionarioNome(txtBarraDeBusca.Text, ativo);
-            funcionarioDataGridView.DataMember = "FUNCIONARIO";
-            funcionarioDataGridView.Font = new Font("Montserrat SemiBold", 10, FontStyle.Bold);
-            funcionarioDataGridView.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
+            else
+            {
+                funcionarioDataGridView.DataSource = null;
+            }
         }
 
         private void btnAlterar_Click(object sender, EventArgs e)
