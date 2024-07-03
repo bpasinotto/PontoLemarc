@@ -11,6 +11,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
 using FirebirdSql.Data.FirebirdClient;
 using System.Threading;
 using System.Drawing.Text;
+using System.IO;
 
 namespace Ponto
 {
@@ -25,7 +26,7 @@ namespace Ponto
 
 
         private void Form1_Load(object sender, EventArgs e)
-        {             
+        {            
             activeTextBox = txtId;            
             txtId.Focus();
             LimparCampos();
@@ -33,6 +34,10 @@ namespace Ponto
             if (conexaoBanco.ArquivoConfig() == false)
             {
                 Close();
+            }
+            if (VariaveisGlobais.NomeEmpresa != "")
+            {
+                txtNomeEmpresa.Text = VariaveisGlobais.NomeEmpresa;
             }            
         }
 
@@ -238,20 +243,20 @@ namespace Ponto
                             if (dataset.Tables["HORAS"].Rows[0][$"HORA{i}"].ToString() != "")
                             {
                                 if (i == 1)
-                                {
-                                    lblHora1.Text = dataset.Tables["HORAS"].Rows[0][$"HORA{i}"].ToString();
+                                {                                    
+                                    lblHora1.Text = DateTime.Parse(dataset.Tables["HORAS"].Rows[0][$"HORA{i}"].ToString()).ToString("HH:mm:ss");
                                 }
                                 else if (i == 2)
                                 {
-                                    lblHora2.Text = dataset.Tables["HORAS"].Rows[0][$"HORA{i}"].ToString();
+                                    lblHora2.Text = DateTime.Parse(dataset.Tables["HORAS"].Rows[0][$"HORA{i}"].ToString()).ToString("HH:mm:ss");
                                 }
                                 else if (i == 3)
                                 {
-                                    lblHora3.Text = dataset.Tables["HORAS"].Rows[0][$"HORA{i}"].ToString();
+                                    lblHora3.Text = DateTime.Parse(dataset.Tables["HORAS"].Rows[0][$"HORA{i}"].ToString()).ToString("HH:mm:ss");
                                 }
                                 else
                                 {
-                                    lblHora4.Text = dataset.Tables["HORAS"].Rows[0][$"HORA{i}"].ToString();
+                                    lblHora4.Text = DateTime.Parse(dataset.Tables["HORAS"].Rows[0][$"HORA{i}"].ToString()).ToString("HH:mm:ss");
                                 }
 
                             }
@@ -375,6 +380,42 @@ namespace Ponto
         {
             // Evita selecionar o texto com o mouse
             txtSenha.SelectionLength = 0;
+        }
+
+        private void txtNomeEmpresa_Enter(object sender, EventArgs e)
+        {
+            if (txtNomeEmpresa.Text == "Nome da Empresa")
+            {
+                txtNomeEmpresa.Text = "";                
+            }
+        }
+
+        private void txtNomeEmpresa_Leave(object sender, EventArgs e)
+        {
+            if (txtNomeEmpresa.Text == "")
+            {
+                txtNomeEmpresa.Text = "Nome da Empresa";                
+            }
+
+            try
+            {
+                string caminhoConfig = AppDomain.CurrentDomain.BaseDirectory + "config.ini";
+
+                string[] linhas = File.ReadAllLines(caminhoConfig);
+
+                string servidor = linhas[0].Split('=')[1];
+                string nomeBancoDados = linhas[1].Split('=')[1];
+                string nomeDaEmpresa = linhas[2].Split('=')[1];
+
+                string conteudoArquivo = $"Servidor={servidor}\nBancoDeDados={nomeBancoDados}\nNomeDaEmpresa={txtNomeEmpresa.Text}";
+                File.WriteAllText(caminhoConfig, conteudoArquivo);
+            }
+            catch (Exception)
+            {
+
+                MessageBox.Show("Erro ao salvar o nome da empresa");
+            }
+
         }
     }
 }

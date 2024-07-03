@@ -61,6 +61,7 @@
             this.pnHoras = new System.Windows.Forms.Panel();
             this.txtId = new System.Windows.Forms.MaskedTextBox();
             this.txtSenha = new System.Windows.Forms.MaskedTextBox();
+            this.txtNomeEmpresa = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.tecladoNumerico.SuspendLayout();
             this.pnHoras.SuspendLayout();
@@ -78,7 +79,7 @@
             this.lblCodigo.BackColor = System.Drawing.Color.Transparent;
             this.lblCodigo.Font = new System.Drawing.Font("Montserrat", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCodigo.ForeColor = System.Drawing.Color.White;
-            this.lblCodigo.Location = new System.Drawing.Point(58, 66);
+            this.lblCodigo.Location = new System.Drawing.Point(58, 67);
             this.lblCodigo.Name = "lblCodigo";
             this.lblCodigo.Size = new System.Drawing.Size(43, 37);
             this.lblCodigo.TabIndex = 6;
@@ -90,7 +91,7 @@
             this.lblSenha.BackColor = System.Drawing.Color.Transparent;
             this.lblSenha.Font = new System.Drawing.Font("Montserrat", 20.25F);
             this.lblSenha.ForeColor = System.Drawing.Color.White;
-            this.lblSenha.Location = new System.Drawing.Point(58, 161);
+            this.lblSenha.Location = new System.Drawing.Point(58, 162);
             this.lblSenha.Name = "lblSenha";
             this.lblSenha.Size = new System.Drawing.Size(102, 37);
             this.lblSenha.TabIndex = 7;
@@ -102,7 +103,7 @@
             this.lblNomeFuncionario.BackColor = System.Drawing.Color.Transparent;
             this.lblNomeFuncionario.Font = new System.Drawing.Font("Montserrat", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNomeFuncionario.ForeColor = System.Drawing.Color.White;
-            this.lblNomeFuncionario.Location = new System.Drawing.Point(59, 286);
+            this.lblNomeFuncionario.Location = new System.Drawing.Point(59, 287);
             this.lblNomeFuncionario.MaximumSize = new System.Drawing.Size(260, 37);
             this.lblNomeFuncionario.Name = "lblNomeFuncionario";
             this.lblNomeFuncionario.Size = new System.Drawing.Size(248, 37);
@@ -120,7 +121,7 @@
             this.btnLupa.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLupa.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLupa.ForeColor = System.Drawing.Color.White;
-            this.btnLupa.Location = new System.Drawing.Point(211, 111);
+            this.btnLupa.Location = new System.Drawing.Point(211, 112);
             this.btnLupa.Name = "btnLupa";
             this.btnLupa.Size = new System.Drawing.Size(30, 31);
             this.btnLupa.TabIndex = 9;
@@ -139,7 +140,7 @@
             this.btnVerSenha.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnVerSenha.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnVerSenha.ForeColor = System.Drawing.Color.White;
-            this.btnVerSenha.Location = new System.Drawing.Point(211, 206);
+            this.btnVerSenha.Location = new System.Drawing.Point(211, 207);
             this.btnVerSenha.Name = "btnVerSenha";
             this.btnVerSenha.Size = new System.Drawing.Size(30, 31);
             this.btnVerSenha.TabIndex = 4;
@@ -518,7 +519,7 @@
             // txtId
             // 
             this.txtId.Font = new System.Drawing.Font("Montserrat", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtId.Location = new System.Drawing.Point(65, 106);
+            this.txtId.Location = new System.Drawing.Point(65, 107);
             this.txtId.Mask = "00000";
             this.txtId.Name = "txtId";
             this.txtId.PromptChar = ' ';
@@ -534,7 +535,7 @@
             // txtSenha
             // 
             this.txtSenha.Font = new System.Drawing.Font("Montserrat", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSenha.Location = new System.Drawing.Point(65, 201);
+            this.txtSenha.Location = new System.Drawing.Point(65, 202);
             this.txtSenha.Mask = "&&&&&&&&&&";
             this.txtSenha.Name = "txtSenha";
             this.txtSenha.PromptChar = ' ';
@@ -546,6 +547,21 @@
             this.txtSenha.MouseDown += new System.Windows.Forms.MouseEventHandler(this.txtSenha_MouseDown);
             this.txtSenha.MouseMove += new System.Windows.Forms.MouseEventHandler(this.txtSenha_MouseMove);
             // 
+            // txtNomeEmpresa
+            // 
+            this.txtNomeEmpresa.BackColor = System.Drawing.SystemColors.HotTrack;
+            this.txtNomeEmpresa.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtNomeEmpresa.Font = new System.Drawing.Font("Montserrat", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtNomeEmpresa.ForeColor = System.Drawing.Color.White;
+            this.txtNomeEmpresa.Location = new System.Drawing.Point(6, 5);
+            this.txtNomeEmpresa.MaxLength = 35;
+            this.txtNomeEmpresa.Name = "txtNomeEmpresa";
+            this.txtNomeEmpresa.Size = new System.Drawing.Size(245, 24);
+            this.txtNomeEmpresa.TabIndex = 24;
+            this.txtNomeEmpresa.Text = "Nome da Empresa";
+            this.txtNomeEmpresa.Enter += new System.EventHandler(this.txtNomeEmpresa_Enter);
+            this.txtNomeEmpresa.Leave += new System.EventHandler(this.txtNomeEmpresa_Leave);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -554,6 +570,7 @@
             this.BackgroundImage = global::Ponto.Properties.Resources.fundo4;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(800, 600);
+            this.Controls.Add(this.txtNomeEmpresa);
             this.Controls.Add(this.lblNomeFuncionario);
             this.Controls.Add(this.txtSenha);
             this.Controls.Add(this.txtId);
@@ -613,6 +630,7 @@
         private System.Windows.Forms.Button btnRelatorios;
         private System.Windows.Forms.MaskedTextBox txtId;
         private System.Windows.Forms.MaskedTextBox txtSenha;
+        private System.Windows.Forms.TextBox txtNomeEmpresa;
     }
 }
 

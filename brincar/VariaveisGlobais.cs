@@ -9,5 +9,6 @@ namespace Ponto
     internal class VariaveisGlobais
     {
         public static int CodigoTroca;
+        public static string NomeEmpresa = "";
     }
 }

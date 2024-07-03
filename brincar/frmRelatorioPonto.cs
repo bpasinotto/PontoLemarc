@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Common;
 using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices.ComTypes;
@@ -17,16 +18,16 @@ using static System.Net.Mime.MediaTypeNames;
 namespace Ponto
 {
     public partial class frmRelatorioPonto : Form
-    {
-        ConexaoBanco conexaoBanco = new ConexaoBanco();        
-        
+    {        
+        ConexaoBanco conexaoBanco = new ConexaoBanco();
+
         public frmRelatorioPonto()
         {
             InitializeComponent();
         }
 
         private void frmRelatorioPonto_Load(object sender, EventArgs e)
-        {            
+        {
             cbFuncionario.Items.Add("Todos");
             cbFuncionario.Items.AddRange(conexaoBanco.IdEnome(1).Tables["FUNCIONARIO"].AsEnumerable().Select(row => row["NOME"]).ToArray());
         }
@@ -35,7 +36,7 @@ namespace Ponto
         {
             Close();
         }
-                
+
 
         private void btnConsultar_Click(object sender, EventArgs e)
         {
@@ -72,22 +73,27 @@ namespace Ponto
         }
 
         private void btnImprimir_Click(object sender, EventArgs e)
-        {            
+        {
             // Obtenha os dados do DataGridView
             DataSet ds = new DataSet();
             DataTable dt = new DataTable();
+            DataRow dataRow;
+
             foreach (DataGridViewColumn column in dgvConsultaPonto.Columns)
             {
                 dt.Columns.Add(column.HeaderText);
             }
 
+            dt.Columns.Add("Empresa");
+
             foreach (DataGridViewRow row in dgvConsultaPonto.Rows)
             {
-                DataRow dataRow = dt.NewRow();
+                dataRow = dt.NewRow();
                 foreach (DataGridViewCell cell in row.Cells)
                 {
                     dataRow[cell.ColumnIndex] = cell.Value;
-                }
+                }                
+                dataRow["Empresa"] = VariaveisGlobais.NomeEmpresa;
                 dt.Rows.Add(dataRow);
             }
 
@@ -107,15 +113,15 @@ namespace Ponto
                 fm.crystalReportViewer1.Refresh();
                 fm.ShowDialog();
             }
-                        
+
         }
 
         private void btnGrafico_Click(object sender, EventArgs e)
-        {  
+        {
             string dataInicial = dtDataInicial.Value.ToString("yyyy-MM-dd");
             string dataFinal = dtDataFinal.Value.ToString("yyyy-MM-dd");
 
-            if(dgvConsultaPonto.DataSource != null)
+            if (dgvConsultaPonto.DataSource != null)
             {
                 frmGrafico fm = new frmGrafico(cbFuncionario.Text, dataInicial, dataFinal);
                 fm.ShowDialog();
@@ -125,7 +131,7 @@ namespace Ponto
                 MessageBox.Show("Faça uma Consulta primeiro", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
 
-           
+
         }
 
         private void cbAtivo_CheckedChanged(object sender, EventArgs e)
@@ -142,6 +148,6 @@ namespace Ponto
             dgvConsultaPonto.DataSource = null;
         }
 
-       
+
     }
 }

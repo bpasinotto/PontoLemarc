@@ -14,7 +14,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 namespace Ponto
 {
     public class ConexaoBanco
-    {
+    {        
         string strConexao = "";
         private FbConnection con;
         FbCommand comando;
@@ -51,8 +51,14 @@ namespace Ponto
                     string[] linhas = File.ReadAllLines(caminhoConfig);
 
                     string servidor = linhas[0].Split('=')[1];
-                    string nomeBancoDados = linhas[1].Split('=')[1];                   
-
+                    string nomeBancoDados = linhas[1].Split('=')[1];
+                    string nomeDaEmpresa = linhas[2].Split('=')[1];
+                    if (nomeDaEmpresa != "")
+                    {
+                        VariaveisGlobais.NomeEmpresa = nomeDaEmpresa;
+                    }
+                                        
+                    
                     if (servidor == "" || nomeBancoDados == "")
                     {
                         strConexao = $"DataSource=localhost; Database={caminhoBanco};" + usuarioEsenha;
@@ -77,7 +83,7 @@ namespace Ponto
             {
                 
                 // Criando o conteúdo do arquivo de texto
-                string conteudoArquivo = "Servidor=\nBancoDeDados=";
+                string conteudoArquivo = "Servidor=\nBancoDeDados=\nNomeDaEmpresa=";
 
                 // Escrevendo o conteúdo no arquivo
                 try
@@ -216,15 +222,43 @@ namespace Ponto
 
         public DataSet PontosBatidos(string id)
         {
-            var dataAtual = DateTime.Now.ToString("yyyy-MM-dd");
+            string dataAtual = DateTime.Now.ToString("yyyy-MM-dd");
+            string dataAnterior = DateTime.Now.AddDays(-1).ToString("yyyy-MM-dd");
 
-            comando = new FbCommand($"SELECT HORA1, HORA2, HORA3, HORA4 FROM HORAS WHERE ID_FUNCIONARIO = {id} AND DATA = '{dataAtual}'", con);
+            comando = new FbCommand($"SELECT HORA1, HORA2, HORA3, HORA4 FROM HORAS WHERE ID_FUNCIONARIO = {id} AND DATA = '{dataAnterior}'", con);
             FbDataAdapter data = new FbDataAdapter(comando);
             DataSet dataset = new DataSet();
             con.Open();
-            data.Fill(dataset, "HORAS");
+            data.Fill(dataset, "HORAS");            
             con.Close();
-            return dataset;
+
+            if (dataset.Tables["HORAS"].Rows.Count > 0)
+            {
+                if (dataset.Tables["HORAS"].Rows[0]["HORA2"].ToString() == "")
+                {
+                    return dataset;
+                }
+                else
+                {
+                    comando = new FbCommand($"SELECT HORA1, HORA2, HORA3, HORA4 FROM HORAS WHERE ID_FUNCIONARIO = {id} AND DATA = '{dataAtual}'", con);
+                    data = new FbDataAdapter(comando);
+                    dataset = new DataSet();
+                    con.Open();
+                    data.Fill(dataset, "HORAS");
+                    con.Close();
+                    return dataset;
+                }
+            }
+            else
+            {
+                comando = new FbCommand($"SELECT HORA1, HORA2, HORA3, HORA4 FROM HORAS WHERE ID_FUNCIONARIO = {id} AND DATA = '{dataAtual}'", con);
+                data = new FbDataAdapter(comando);
+                dataset = new DataSet();
+                con.Open();
+                data.Fill(dataset, "HORAS");
+                con.Close();
+                return dataset;
+            }
         }
 
         public bool ValidarSenha(string id, string senha)
@@ -347,13 +381,23 @@ namespace Ponto
         public void InserirHora(string id)
         {
             var dataAtual = DateTime.Now.ToString("yyyy-MM-dd");
+            var data = DateTime.Now.AddDays(-1).ToString("yyyy-MM-dd");            
             var horaAtual = DateTime.Now.ToString("HH:mm:ss");
+            var dataHoraAtual = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
 
             con.Open();
-            FbCommand comando2 = new FbCommand($"SELECT * FROM HORAS WHERE ID_FUNCIONARIO = {id} AND DATA = '{dataAtual}' AND HORA2 IS NULL", con);
+            FbCommand comando2 = new FbCommand($"SELECT * FROM HORAS WHERE ID_FUNCIONARIO = {id} AND DATA = '{data}' AND HORA2 IS NULL", con);
             FbDataAdapter data2 = new FbDataAdapter(comando2);
             DataSet hora2 = new DataSet();
             data2.Fill(hora2, "HORAS");
+            if (hora2.Tables["HORAS"].Rows.Count == 0)
+            {
+                data = dataAtual;                
+                comando2 = new FbCommand($"SELECT * FROM HORAS WHERE ID_FUNCIONARIO = {id} AND DATA = '{data}' AND HORA2 IS NULL", con);
+                data2 = new FbDataAdapter(comando2);
+                hora2 = new DataSet();
+                data2.Fill(hora2, "HORAS");
+            }
 
             FbCommand comando3 = new FbCommand($"SELECT * FROM HORAS WHERE ID_FUNCIONARIO = {id} AND DATA = '{dataAtual}' AND HORA3 IS NULL", con);
             FbDataAdapter data3 = new FbDataAdapter(comando3);
@@ -369,28 +413,28 @@ namespace Ponto
 
             if (hora2.Tables["HORAS"].Rows.Count > 0)
             {
-                comando = new FbCommand($"UPDATE HORAS SET HORA2 = '{horaAtual}' WHERE ID_FUNCIONARIO = {id} AND DATA = '{dataAtual}'", con);
+                comando = new FbCommand($"UPDATE HORAS SET HORA2 = '{dataHoraAtual}' WHERE ID_FUNCIONARIO = {id} AND DATA = '{data}'", con);
                 con.Open();
                 comando.ExecuteNonQuery();
                 con.Close();
             }
             else if (hora3.Tables["HORAS"].Rows.Count > 0)
             {
-                comando = new FbCommand($"UPDATE HORAS SET HORA3 = '{horaAtual}' WHERE ID_FUNCIONARIO = {id} AND DATA = '{dataAtual}'", con);
+                comando = new FbCommand($"UPDATE HORAS SET HORA3 = '{dataHoraAtual}' WHERE ID_FUNCIONARIO = {id} AND DATA = '{dataAtual}'", con);
                 con.Open();
                 comando.ExecuteNonQuery();
                 con.Close();
             }
             else if (hora4.Tables["HORAS"].Rows.Count > 0)
             {
-                comando = new FbCommand($"UPDATE HORAS SET HORA4 = '{horaAtual}' WHERE ID_FUNCIONARIO = {id} AND DATA = '{dataAtual}'", con);
+                comando = new FbCommand($"UPDATE HORAS SET HORA4 = '{dataHoraAtual}' WHERE ID_FUNCIONARIO = {id} AND DATA = '{dataAtual}'", con);
                 con.Open();
                 comando.ExecuteNonQuery();
                 con.Close();
             }
             else
             {
-                comando = new FbCommand($"INSERT INTO horas (id_funcionario, data, hora1) VALUES ({id}, '{dataAtual}', '{horaAtual}')", con);
+                comando = new FbCommand($"INSERT INTO horas (id_funcionario, data, hora1) VALUES ({id}, '{dataAtual}', '{dataHoraAtual}')", con);
                 con.Open();
                 comando.ExecuteNonQuery();
                 con.Close();

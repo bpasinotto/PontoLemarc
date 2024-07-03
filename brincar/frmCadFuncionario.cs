@@ -220,6 +220,7 @@ namespace Ponto
                 
             }
         }
+               
 
         private void btnVerSenha_Click(object sender, EventArgs e)
         {
