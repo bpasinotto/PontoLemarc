@@ -368,6 +368,53 @@ namespace Ponto
             con.Close();
         }
 
+        public void SalvarConfiguracoesEmail(string emailPonte, string senha, string smtp, string porta, int ssl, string emailContabi)
+        {
+            
+            comando = new FbCommand($"INSERT INTO CONFIG (EMAILPONTE, SENHA, SMTP, PORTA, SSL, EMAILCONTABI) VALUES ('{emailPonte}', '{senha}', '{smtp}', '{porta}', {ssl}, '{emailContabi}')", con);
+            con.Open();
+
+            if (comando.ExecuteNonQuery() == 1)
+            { 
+                MessageBox.Show("Configuracões de E-mail salvas" , "Salvo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            }
+            else
+            {
+                MessageBox.Show("Erro ao salvar as configuracões", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            con.Close();
+
+        }
+
+        public List<string> CarregarConfiguracoesEmail()
+        {
+            comando = new FbCommand($"SELECT * FROM CONFIG", con);
+            FbDataAdapter data = new FbDataAdapter(comando);
+            DataSet dataset = new DataSet();
+            con.Open();
+            data.Fill(dataset, "CONFIG");
+            con.Close();
+
+            if (dataset.Tables["CONFIG"].Rows.Count == 0)
+            {
+                return null;
+            }
+            {
+                List<string> config = new List<string>();
+                config.Add(dataset.Tables["CONFIG"].Rows[0]["EMAILPONTE"].ToString());
+                config.Add(dataset.Tables["CONFIG"].Rows[0]["SENHA"].ToString());
+                config.Add(dataset.Tables["CONFIG"].Rows[0]["SMTP"].ToString());
+                config.Add(dataset.Tables["CONFIG"].Rows[0]["PORTA"].ToString());
+                config.Add(dataset.Tables["CONFIG"].Rows[0]["SSL"].ToString());
+                config.Add(dataset.Tables["CONFIG"].Rows[0]["EMAILCONTABI"].ToString());
+
+                return config;
+            }
+
+        }
+
         public int DesativarCadastro(string id, int ativo)
         {
             

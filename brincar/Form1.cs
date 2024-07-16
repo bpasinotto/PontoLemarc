@@ -21,7 +21,7 @@ namespace Ponto
         private ConexaoBanco conexaoBanco;
         public Form1()
         {
-            InitializeComponent();                        
+            InitializeComponent();            
         }
 
 
@@ -180,6 +180,7 @@ namespace Ponto
         private void txtSenha_Click(object sender, EventArgs e)
         {
             activeTextBox = (MaskedTextBox)sender; // Define o campo de texto como ativo
+            txtId_KeyDown(sender, new KeyEventArgs(Keys.Enter));
         }
 
         private void btnLupa_Click(object sender, EventArgs e)
@@ -211,9 +212,14 @@ namespace Ponto
 
 
         private void txtId_KeyDown(object sender, KeyEventArgs e)
-        {           
-            // Opcional: Evita a movimentação do cursor com as teclas de seta
-            if (e.KeyCode == Keys.Left || e.KeyCode == Keys.Right)
+        {
+            // Evita a movimentação do cursor com a tecla Espaço
+            if (e.KeyCode == Keys.Space)
+            {
+                e.SuppressKeyPress = true;
+            }
+            // Evita a movimentação do cursor com as teclas de seta
+            if (e.KeyCode == Keys.Left || e.KeyCode == Keys.Right || e.KeyCode == Keys.Up || e.KeyCode == Keys.Down || e.KeyCode == Keys.End)
             {
                 e.Handled = true;
             }
@@ -285,22 +291,17 @@ namespace Ponto
 
             }
         }
-
-        private void txtId_TextChanged(object sender, EventArgs e)
-        {            
-            if (txtId.Text == "")
-            {
-                LimparCampos();
-                txtSenha.Enabled = true;
-            }
-
-        }
-
+         
 
         private void txtSenha_KeyDown(object sender, KeyEventArgs e)
-        {
+        {            
+            // Evita a movimentação do cursor com a tecla Espaço
+            if (e.KeyCode == Keys.Space)
+            {
+                e.SuppressKeyPress = true;
+            }
             // Opcional: Evita a movimentação do cursor com as teclas de seta
-            if (e.KeyCode == Keys.Left || e.KeyCode == Keys.Right)
+            if (e.KeyCode == Keys.Left || e.KeyCode == Keys.Right || e.KeyCode == Keys.Up || e.KeyCode == Keys.Down || e.KeyCode == Keys.End)
             {
                 e.Handled = true;
             }
@@ -353,8 +354,12 @@ namespace Ponto
 
         private void btnRelatorios_Click(object sender, EventArgs e)
         {
-            frmRelatorioPonto consultaPonto = new frmRelatorioPonto();
-            consultaPonto.ShowDialog();
+            frmSenhaDoAdmin senhaDoAdmin = new frmSenhaDoAdmin();
+            if (senhaDoAdmin.ShowDialog() == DialogResult.OK)
+            {
+                frmRelatorioPonto consultaPonto = new frmRelatorioPonto();
+                consultaPonto.ShowDialog();
+            }            
         }
                
 
@@ -416,6 +421,15 @@ namespace Ponto
                 MessageBox.Show("Erro ao salvar o nome da empresa");
             }
 
+        }
+
+        private void txtId_TextChanged(object sender, EventArgs e)
+        {
+            if (txtId.Text == "")
+            {
+                LimparCampos();
+                txtSenha.Enabled = true;
+            }
         }
     }
 }

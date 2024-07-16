@@ -12,11 +12,16 @@ namespace Ponto
 {
     public partial class frmSenhaDoAdmin : Form
     {
-        ConexaoBanco conexaoBanco = new ConexaoBanco();        
+        ConexaoBanco conexaoBanco = new ConexaoBanco();
 
         public frmSenhaDoAdmin()
         {
-            InitializeComponent();
+            InitializeComponent();            
+        }
+
+        private void frmSenhaDoAdmin_Load(object sender, EventArgs e)
+        {
+            txtSenha.Focus();
         }
 
         private void btnVerSenha_Click(object sender, EventArgs e)
@@ -34,7 +39,7 @@ namespace Ponto
         private void btnVoltar_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.Abort;
-            Close();            
+            Close();
         }
 
         private void btnContinuar_Click(object sender, EventArgs e)
@@ -43,16 +48,24 @@ namespace Ponto
         }
 
         public void Validar()
-        {  
+        {
             if (conexaoBanco.ValidarSenhaAdmin("1", txtSenha.Text))
             {
                 this.DialogResult = DialogResult.OK;
                 Close();
             }
-            else 
+            else
             {
-                MessageBox.Show("Senha Incorreta", "", MessageBoxButtons.OK, MessageBoxIcon.Error);                
-            }           
+                MessageBox.Show("Senha Incorreta", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void txtSenha_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                Validar();
+            }
         }
     }
 }

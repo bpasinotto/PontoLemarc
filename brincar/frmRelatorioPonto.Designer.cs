@@ -40,6 +40,7 @@
             this.btnImprimir = new System.Windows.Forms.Button();
             this.btnGrafico = new System.Windows.Forms.Button();
             this.cbAtivo = new System.Windows.Forms.CheckBox();
+            this.btnConfiguracoes = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvConsultaPonto)).BeginInit();
             this.SuspendLayout();
             // 
@@ -47,7 +48,7 @@
             // 
             this.btnFechar.Font = new System.Drawing.Font("Montserrat SemiBold", 8.999999F, System.Drawing.FontStyle.Bold);
             this.btnFechar.ForeColor = System.Drawing.Color.Black;
-            this.btnFechar.Location = new System.Drawing.Point(697, 529);
+            this.btnFechar.Location = new System.Drawing.Point(695, 529);
             this.btnFechar.Name = "btnFechar";
             this.btnFechar.Size = new System.Drawing.Size(75, 23);
             this.btnFechar.TabIndex = 28;
@@ -148,7 +149,7 @@
             // 
             this.btnImprimir.Font = new System.Drawing.Font("Montserrat SemiBold", 8.999999F, System.Drawing.FontStyle.Bold);
             this.btnImprimir.ForeColor = System.Drawing.Color.Black;
-            this.btnImprimir.Location = new System.Drawing.Point(600, 529);
+            this.btnImprimir.Location = new System.Drawing.Point(597, 529);
             this.btnImprimir.Name = "btnImprimir";
             this.btnImprimir.Size = new System.Drawing.Size(75, 23);
             this.btnImprimir.TabIndex = 37;
@@ -160,7 +161,7 @@
             // 
             this.btnGrafico.Font = new System.Drawing.Font("Montserrat SemiBold", 8.999999F, System.Drawing.FontStyle.Bold);
             this.btnGrafico.ForeColor = System.Drawing.Color.Black;
-            this.btnGrafico.Location = new System.Drawing.Point(502, 529);
+            this.btnGrafico.Location = new System.Drawing.Point(499, 529);
             this.btnGrafico.Name = "btnGrafico";
             this.btnGrafico.Size = new System.Drawing.Size(75, 23);
             this.btnGrafico.TabIndex = 38;
@@ -187,6 +188,18 @@
             this.cbAtivo.UseVisualStyleBackColor = false;
             this.cbAtivo.CheckedChanged += new System.EventHandler(this.cbAtivo_CheckedChanged);
             // 
+            // btnConfiguracoes
+            // 
+            this.btnConfiguracoes.Font = new System.Drawing.Font("Montserrat SemiBold", 8.999999F, System.Drawing.FontStyle.Bold);
+            this.btnConfiguracoes.ForeColor = System.Drawing.Color.Black;
+            this.btnConfiguracoes.Location = new System.Drawing.Point(372, 529);
+            this.btnConfiguracoes.Name = "btnConfiguracoes";
+            this.btnConfiguracoes.Size = new System.Drawing.Size(104, 23);
+            this.btnConfiguracoes.TabIndex = 40;
+            this.btnConfiguracoes.Text = "Configurações";
+            this.btnConfiguracoes.UseVisualStyleBackColor = true;
+            this.btnConfiguracoes.Click += new System.EventHandler(this.btnConfiguracoes_Click);
+            // 
             // frmRelatorioPonto
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -194,6 +207,7 @@
             this.BackColor = System.Drawing.SystemColors.HotTrack;
             this.ClientSize = new System.Drawing.Size(784, 561);
             this.ControlBox = false;
+            this.Controls.Add(this.btnConfiguracoes);
             this.Controls.Add(this.cbAtivo);
             this.Controls.Add(this.btnGrafico);
             this.Controls.Add(this.btnImprimir);
@@ -231,5 +245,6 @@
         private System.Windows.Forms.Button btnGrafico;
         private System.Windows.Forms.ComboBox cbFuncionario;
         private System.Windows.Forms.CheckBox cbAtivo;
+        private System.Windows.Forms.Button btnConfiguracoes;
     }
 }

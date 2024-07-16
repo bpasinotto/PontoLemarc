@@ -131,6 +131,12 @@
       <DependentUpon>frmCadFuncionario.cs</DependentUpon>
     </Compile>
     <Compile Include="ConexaoBanco.cs" />
+    <Compile Include="frmConfiguracoes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmConfiguracoes.Designer.cs">
+      <DependentUpon>frmConfiguracoes.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmConsultaFuncionario.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -191,6 +197,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmCadFuncionario.resx">
       <DependentUpon>frmCadFuncionario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmConfiguracoes.resx">
+      <DependentUpon>frmConfiguracoes.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmConsultaFuncionario.resx">
       <DependentUpon>frmConsultaFuncionario.cs</DependentUpon>

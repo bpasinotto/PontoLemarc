@@ -42,7 +42,7 @@
             this.btnContinuar.Location = new System.Drawing.Point(68, 125);
             this.btnContinuar.Name = "btnContinuar";
             this.btnContinuar.Size = new System.Drawing.Size(80, 23);
-            this.btnContinuar.TabIndex = 31;
+            this.btnContinuar.TabIndex = 2;
             this.btnContinuar.Text = "Continuar";
             this.btnContinuar.UseVisualStyleBackColor = true;
             this.btnContinuar.Click += new System.EventHandler(this.btnContinuar_Click);
@@ -65,8 +65,9 @@
             this.txtSenha.MaxLength = 10;
             this.txtSenha.Name = "txtSenha";
             this.txtSenha.Size = new System.Drawing.Size(206, 31);
-            this.txtSenha.TabIndex = 32;
+            this.txtSenha.TabIndex = 1;
             this.txtSenha.UseSystemPasswordChar = true;
+            this.txtSenha.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtSenha_KeyDown);
             // 
             // btnVerSenha
             // 
@@ -94,7 +95,7 @@
             this.btnVoltar.Location = new System.Drawing.Point(154, 125);
             this.btnVoltar.Name = "btnVoltar";
             this.btnVoltar.Size = new System.Drawing.Size(80, 23);
-            this.btnVoltar.TabIndex = 34;
+            this.btnVoltar.TabIndex = 3;
             this.btnVoltar.Text = "Voltar";
             this.btnVoltar.UseVisualStyleBackColor = true;
             this.btnVoltar.Click += new System.EventHandler(this.btnVoltar_Click);
@@ -114,6 +115,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "frmSenhaDoAdmin";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.Load += new System.EventHandler(this.frmSenhaDoAdmin_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

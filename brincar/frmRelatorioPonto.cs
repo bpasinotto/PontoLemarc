@@ -148,6 +148,10 @@ namespace Ponto
             dgvConsultaPonto.DataSource = null;
         }
 
-
+        private void btnConfiguracoes_Click(object sender, EventArgs e)
+        {
+            frmConfiguracoes frmConfiguracoes = new frmConfiguracoes();
+            frmConfiguracoes.ShowDialog();
+        }
     }
 }
