@@ -14,14 +14,14 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 namespace Ponto
 {
     public class ConexaoBanco
-    {        
+    {
         string strConexao = "";
         private FbConnection con;
         FbCommand comando;
 
         public ConexaoBanco()
         {
-             ArquivoConfig();             
+            ArquivoConfig();
         }
 
         //private string servidor = "localhost";
@@ -30,8 +30,8 @@ namespace Ponto
         //private string senha = "masterkey";
 
         //private string strConexao = @"DataSource=localhost; Database=C:\Ponto\Banco\PONTO.FDB; username=SYSDBA; password=masterkey";
-        
-        
+
+
 
         //criar arquivo de texto para armazenar caminho da base de dados
         public bool ArquivoConfig()
@@ -57,8 +57,8 @@ namespace Ponto
                     {
                         VariaveisGlobais.NomeEmpresa = nomeDaEmpresa;
                     }
-                                        
-                    
+
+
                     if (servidor == "" || nomeBancoDados == "")
                     {
                         strConexao = $"DataSource=localhost; Database={caminhoBanco};" + usuarioEsenha;
@@ -75,13 +75,13 @@ namespace Ponto
                 }
                 catch (Exception)
                 {
-                    MessageBox.Show($"Não foi possivel se conectar ao Banco de Dados, entre em contato com o Suporte.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);                    
+                    MessageBox.Show($"Não foi possivel se conectar ao Banco de Dados, entre em contato com o Suporte.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return false;
                 }
             }
             else
             {
-                
+
                 // Criando o conteúdo do arquivo de texto
                 string conteudoArquivo = "Servidor=\nBancoDeDados=\nNomeDaEmpresa=";
 
@@ -229,7 +229,7 @@ namespace Ponto
             FbDataAdapter data = new FbDataAdapter(comando);
             DataSet dataset = new DataSet();
             con.Open();
-            data.Fill(dataset, "HORAS");            
+            data.Fill(dataset, "HORAS");
             con.Close();
 
             if (dataset.Tables["HORAS"].Rows.Count > 0)
@@ -294,7 +294,7 @@ namespace Ponto
             data.Fill(dataset, "FUNCIONARIO");
             con.Close();
 
-            return GerenciadorDeSenha.VerificarSenha(senha, dataset.Tables["FUNCIONARIO"].Rows[0]["SENHA"].ToString());                       
+            return GerenciadorDeSenha.VerificarSenha(senha, dataset.Tables["FUNCIONARIO"].Rows[0]["SENHA"].ToString());
         }
 
         public int InserirSenhaGerada(string id, string senha)
@@ -370,22 +370,43 @@ namespace Ponto
 
         public void SalvarConfiguracoesEmail(string emailPonte, string senha, string smtp, string porta, int ssl, string emailContabi)
         {
-            
-            comando = new FbCommand($"INSERT INTO CONFIG (EMAILPONTE, SENHA, SMTP, PORTA, SSL, EMAILCONTABI) VALUES ('{emailPonte}', '{senha}', '{smtp}', '{porta}', {ssl}, '{emailContabi}')", con);
+            comando = new FbCommand("SELECT * FROM CONFIG", con);
             con.Open();
-
-            if (comando.ExecuteNonQuery() == 1)
-            { 
-                MessageBox.Show("Configuracões de E-mail salvas" , "Salvo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
+            FbDataAdapter data = new FbDataAdapter(comando);
+            DataSet dataset = new DataSet();
+            data.Fill(dataset, "CONFIG");
+            con.Close();
+            if (dataset.Tables["CONFIG"].Rows.Count > 0)
+            {
+                comando = new FbCommand($"UPDATE CONFIG SET EMAILPONTE = '{emailPonte}', SENHA = '{senha}', SMTP = '{smtp}', PORTA = '{porta}', SSL = {ssl}, EMAILCONTABI = '{emailContabi}'", con);
+                con.Open();
+                if (comando.ExecuteNonQuery() == 1)
+                {
+                    MessageBox.Show("Configuracões de E-mail alteradas", "Sucesso!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Erro ao alterar as configuracões", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                con.Close();
             }
             else
             {
-                MessageBox.Show("Erro ao salvar as configuracões", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                comando = new FbCommand($"INSERT INTO CONFIG (EMAILPONTE, SENHA, SMTP, PORTA, SSL, EMAILCONTABI) VALUES ('{emailPonte}', '{senha}', '{smtp}', '{porta}', {ssl}, '{emailContabi}')", con);
+                con.Open();
+
+                if (comando.ExecuteNonQuery() == 1)
+                {
+                    MessageBox.Show("Configuracões de E-mail salvas", "Salvo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                }
+                else
+                {
+                    MessageBox.Show("Erro ao salvar as configuracões", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+                con.Close();
             }
-
-            con.Close();
-
         }
 
         public List<string> CarregarConfiguracoesEmail()
@@ -417,7 +438,7 @@ namespace Ponto
 
         public int DesativarCadastro(string id, int ativo)
         {
-            
+
             comando = new FbCommand($"UPDATE FUNCIONARIO SET ATIVO = {ativo} WHERE ID = {id}", con);
             con.Open();
             int i = comando.ExecuteNonQuery();
@@ -428,7 +449,7 @@ namespace Ponto
         public void InserirHora(string id)
         {
             var dataAtual = DateTime.Now.ToString("yyyy-MM-dd");
-            var data = DateTime.Now.AddDays(-1).ToString("yyyy-MM-dd");            
+            var data = DateTime.Now.AddDays(-1).ToString("yyyy-MM-dd");
             var horaAtual = DateTime.Now.ToString("HH:mm:ss");
             var dataHoraAtual = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
 
@@ -439,7 +460,7 @@ namespace Ponto
             data2.Fill(hora2, "HORAS");
             if (hora2.Tables["HORAS"].Rows.Count == 0)
             {
-                data = dataAtual;                
+                data = dataAtual;
                 comando2 = new FbCommand($"SELECT * FROM HORAS WHERE ID_FUNCIONARIO = {id} AND DATA = '{data}' AND HORA2 IS NULL", con);
                 data2 = new FbDataAdapter(comando2);
                 hora2 = new DataSet();

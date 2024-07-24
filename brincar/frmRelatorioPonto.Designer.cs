@@ -41,6 +41,7 @@
             this.btnGrafico = new System.Windows.Forms.Button();
             this.cbAtivo = new System.Windows.Forms.CheckBox();
             this.btnConfiguracoes = new System.Windows.Forms.Button();
+            this.btnEnviarEmail = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvConsultaPonto)).BeginInit();
             this.SuspendLayout();
             // 
@@ -200,6 +201,18 @@
             this.btnConfiguracoes.UseVisualStyleBackColor = true;
             this.btnConfiguracoes.Click += new System.EventHandler(this.btnConfiguracoes_Click);
             // 
+            // btnEnviarEmail
+            // 
+            this.btnEnviarEmail.Font = new System.Drawing.Font("Montserrat SemiBold", 8.999999F, System.Drawing.FontStyle.Bold);
+            this.btnEnviarEmail.ForeColor = System.Drawing.Color.Black;
+            this.btnEnviarEmail.Location = new System.Drawing.Point(228, 529);
+            this.btnEnviarEmail.Name = "btnEnviarEmail";
+            this.btnEnviarEmail.Size = new System.Drawing.Size(122, 23);
+            this.btnEnviarEmail.TabIndex = 41;
+            this.btnEnviarEmail.Text = "Enviar por E-mail";
+            this.btnEnviarEmail.UseVisualStyleBackColor = true;
+            this.btnEnviarEmail.Click += new System.EventHandler(this.btnEnviarEmail_Click);
+            // 
             // frmRelatorioPonto
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -207,6 +220,7 @@
             this.BackColor = System.Drawing.SystemColors.HotTrack;
             this.ClientSize = new System.Drawing.Size(784, 561);
             this.ControlBox = false;
+            this.Controls.Add(this.btnEnviarEmail);
             this.Controls.Add(this.btnConfiguracoes);
             this.Controls.Add(this.cbAtivo);
             this.Controls.Add(this.btnGrafico);
@@ -246,5 +260,6 @@
         private System.Windows.Forms.ComboBox cbFuncionario;
         private System.Windows.Forms.CheckBox cbAtivo;
         private System.Windows.Forms.Button btnConfiguracoes;
+        private System.Windows.Forms.Button btnEnviarEmail;
     }
 }

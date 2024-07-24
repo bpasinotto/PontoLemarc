@@ -84,8 +84,16 @@ namespace Ponto
 
         private void btnSalvar_Click(object sender, EventArgs e)
         {
-            int SSL = 0; if (cbSSL.Checked) { SSL = 1; }
-            conexaoBanco.SalvarConfiguracoesEmail(txtEmailPonte.Text, txtSenha.Text, txtSmtp.Text, txtPorta.Text, SSL, txtEmailContabi.Text);
+            if(txtEmailPonte.Text == "" || txtSenha.Text == "" || txtSmtp.Text == "" || txtPorta.Text == "" || txtEmailContabi.Text == "" )
+            {
+                MessageBox.Show("Preencha todos os campos!", "Atenção!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                int SSL = 0; if (cbSSL.Checked) { SSL = 1; }
+                conexaoBanco.SalvarConfiguracoesEmail(txtEmailPonte.Text, txtSenha.Text, txtSmtp.Text, txtPorta.Text, SSL, txtEmailContabi.Text);
+            }
+
         }
     }
 }
