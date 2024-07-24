@@ -123,20 +123,25 @@ namespace Ponto
 
         private void btnGrafico_Click(object sender, EventArgs e)
         {
-            string dataInicial = dtDataInicial.Value.ToString("yyyy-MM-dd");
-            string dataFinal = dtDataFinal.Value.ToString("yyyy-MM-dd");
-
-            if (dgvConsultaPonto.DataSource != null)
+            if (dgvConsultaPonto.Rows.Count > 0)
             {
-                frmGrafico fm = new frmGrafico(cbFuncionario.Text, dataInicial, dataFinal);
-                fm.ShowDialog();
+                string dataInicial = dtDataInicial.Value.ToString("yyyy-MM-dd");
+                string dataFinal = dtDataFinal.Value.ToString("yyyy-MM-dd");
+
+                if (dgvConsultaPonto.DataSource != null)
+                {
+                    frmGrafico fm = new frmGrafico(cbFuncionario.Text, dataInicial, dataFinal);
+                    fm.ShowDialog();
+                }
+                else
+                {
+                    MessageBox.Show("Faça uma Consulta primeiro", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
             }
             else
             {
                 MessageBox.Show("Faça uma Consulta primeiro", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-
-
         }
 
         private void cbAtivo_CheckedChanged(object sender, EventArgs e)
