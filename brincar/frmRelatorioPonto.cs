@@ -79,37 +79,37 @@ namespace Ponto
 
         private void btnImprimir_Click(object sender, EventArgs e)
         {
-            // Obtenha os dados do DataGridView
-            DataSet ds = new DataSet();
-            DataTable dt = new DataTable();
-            DataRow dataRow;
-
-            foreach (DataGridViewColumn column in dgvConsultaPonto.Columns)
-            {
-                dt.Columns.Add(column.HeaderText);
-            }
-
-            dt.Columns.Add("Empresa");
-
-            foreach (DataGridViewRow row in dgvConsultaPonto.Rows)
-            {
-                dataRow = dt.NewRow();
-                foreach (DataGridViewCell cell in row.Cells)
-                {
-                    dataRow[cell.ColumnIndex] = cell.Value;
-                }
-                dataRow["Empresa"] = VariaveisGlobais.NomeEmpresa;
-                dt.Rows.Add(dataRow);
-            }
-
-            ds.Tables.Add(dt);
-
-            if (ds.Tables[0].Rows.Count == 0)
+            if (dgvConsultaPonto.Rows.Count == 0)
             {
                 MessageBox.Show("Faça uma Consulta primeiro", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
             {
+                // Obtenha os dados do DataGridView
+                DataSet ds = new DataSet();
+                DataTable dt = new DataTable();
+                DataRow dataRow;
+
+                foreach (DataGridViewColumn column in dgvConsultaPonto.Columns)
+                {
+                    dt.Columns.Add(column.HeaderText);
+                }
+
+                dt.Columns.Add("Empresa");
+
+                foreach (DataGridViewRow row in dgvConsultaPonto.Rows)
+                {
+                    dataRow = dt.NewRow();
+                    foreach (DataGridViewCell cell in row.Cells)
+                    {
+                        dataRow[cell.ColumnIndex] = cell.Value;
+                    }
+                    dataRow["Empresa"] = VariaveisGlobais.NomeEmpresa;
+                    dt.Rows.Add(dataRow);
+                }
+
+                ds.Tables.Add(dt);
+
                 ds.WriteXmlSchema("applicant.xml");
                 frmRelPonto fm = new frmRelPonto();
                 CrystalReport1 cr = new CrystalReport1();
