@@ -63,16 +63,16 @@ public class GerenciadorDeSenha
         try
         {
             // Configurações do servidor SMTP
-            SmtpClient smtpClient = new SmtpClient("smtp-mail.outlook.com"); // Substitua pelo seu servidor SMTP
+            SmtpClient smtpClient = new SmtpClient("smtp.lemarcsistemas.com.br"); // Substitua pelo seu servidor SMTP
             smtpClient.Port = 587; // Porta padrão para SMTP
-            smtpClient.Credentials = new NetworkCredential("bruno_pasinotto@hotmail.com", "MeuMacacoNaoTemRabo@"); // Substitua pelo seu e-mail e senha
-            smtpClient.EnableSsl = true; // Habilitar SSL para segurança
+            smtpClient.Credentials = new NetworkCredential("no-reply@lemarcsistemas.com.br", "lemarc@sistemas"); // Substitua pelo seu e-mail e senha
+            smtpClient.EnableSsl = false; // Habilitar SSL para segurança
 
             // Mensagem de e-mail
             MailMessage mailMessage = new MailMessage();
-            mailMessage.From = new MailAddress("bruno_pasinotto@hotmail.com"); // Seu endereço de e-mail
+            mailMessage.From = new MailAddress("no-reply@lemarcsistemas.com.br"); // Seu endereço de e-mail
             mailMessage.To.Add(email); // E-mail do destinatário
-            mailMessage.Subject = "Redefinição de senha"; // Assunto do e-mail
+            mailMessage.Subject = "Redefinição de senha Ponto Lemarc"; // Assunto do e-mail
             mailMessage.Body = "No campo 'Senha recebida por e-mail' digite: " + novaSenha; // Corpo do e-mail
 
             // Envio do e-mail
