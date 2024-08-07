@@ -20,8 +20,7 @@ namespace Ponto
         FbCommand comando;
 
         public ConexaoBanco()
-        {
-            ArquivoConfig();
+        {            
         }
 
         //private string servidor = "localhost";
@@ -52,13 +51,7 @@ namespace Ponto
 
                     string servidor = linhas[0].Split('=')[1];
                     string nomeBancoDados = linhas[1].Split('=')[1];
-                    string nomeDaEmpresa = linhas[2].Split('=')[1];
-                    if (nomeDaEmpresa != "")
-                    {
-                        VariaveisGlobais.NomeEmpresa = nomeDaEmpresa;
-                    }
-
-
+                    
                     if (servidor == "" || nomeBancoDados == "")
                     {
                         strConexao = $"DataSource=localhost; Database={caminhoBanco};" + usuarioEsenha;
@@ -102,6 +95,7 @@ namespace Ponto
 
         public DataSet IdEnome(int ativo)
         {
+            ArquivoConfig();
             comando = new FbCommand($"SELECT ID, NOME FROM FUNCIONARIO WHERE ATIVO = {ativo}", con);
             FbDataAdapter data = new FbDataAdapter(comando);
             DataSet dataset = new DataSet();
@@ -120,10 +114,9 @@ namespace Ponto
             return dataset;
         }
 
-
-
         public DataSet ConsultarPorId(string id)
         {
+            ArquivoConfig();
             comando = new FbCommand($"SELECT NOME FROM FUNCIONARIO WHERE ID = {id} AND ATIVO = 1", con);
             FbDataAdapter data = new FbDataAdapter(comando);
             DataSet dataset = new DataSet();
@@ -143,6 +136,7 @@ namespace Ponto
 
         public DataSet ProcurarFuncionarioNome(string nome, int ativo)
         {
+            ArquivoConfig();
             comando = new FbCommand($"SELECT ID, NOME FROM FUNCIONARIO WHERE NOME LIKE '%{nome}%' AND ATIVO = {ativo}", con);
             FbDataAdapter data = new FbDataAdapter(comando);
             DataSet dataset = new DataSet();
@@ -154,6 +148,7 @@ namespace Ponto
 
         public int VerificarCadastroAtivo(string id)
         {
+            ArquivoConfig();
             comando = new FbCommand($"SELECT ATIVO FROM FUNCIONARIO WHERE ID = {id}", con);
             FbDataAdapter data = new FbDataAdapter(comando);
             DataSet dataset = new DataSet();
@@ -166,6 +161,7 @@ namespace Ponto
 
         public string LocalizarEmailPorId(string id)
         {
+            ArquivoConfig();
             comando = new FbCommand($"SELECT EMAIL FROM FUNCIONARIO WHERE ID = {id}", con);
             FbDataAdapter data = new FbDataAdapter(comando);
             DataSet dataset = new DataSet();
@@ -178,6 +174,7 @@ namespace Ponto
 
         public DataSet PontosPorData(string funcionario, string dataInicio, string dataFim)
         {
+            ArquivoConfig();
             comando = new FbCommand($"SELECT * FROM CONSULTA_PONTOS WHERE \"Funcionário\" = \'{funcionario}\' AND \"Data\" >= '{dataInicio}' AND \"Data\" <= '{dataFim}' ", con);
             FbDataAdapter data = new FbDataAdapter(comando);
             DataSet dataset = new DataSet();
@@ -189,6 +186,7 @@ namespace Ponto
 
         public DataSet ConsultaGraficoFuncionario(string funcionario, string dataInicio, string dataFim)
         {
+            ArquivoConfig();
             comando = new FbCommand($"SELECT * FROM CONSULTA_GRAFICO WHERE \"Funcionário\" = \'{funcionario}\' AND \"Data\" >= '{dataInicio}' AND \"Data\" <= '{dataFim}' ", con);
             FbDataAdapter data = new FbDataAdapter(comando);
             DataSet dataset = new DataSet();
@@ -200,6 +198,7 @@ namespace Ponto
 
         public DataSet ConsultaGraficoTodos(string dataInicio, string dataFim)
         {
+            ArquivoConfig();
             comando = new FbCommand($"SELECT * FROM CONSULTA_GRAFICO WHERE \"Data\" >= '{dataInicio}' AND \"Data\" <= '{dataFim}' ", con);
             FbDataAdapter data = new FbDataAdapter(comando);
             DataSet dataset = new DataSet();
@@ -211,6 +210,7 @@ namespace Ponto
 
         public DataSet ConsultaPontosTodos(string dataInicio, string dataFim)
         {
+            ArquivoConfig();
             comando = new FbCommand($"SELECT * FROM CONSULTA_PONTOS WHERE \"Data\" >= '{dataInicio}' AND \"Data\" <= '{dataFim}' ", con);
             FbDataAdapter data = new FbDataAdapter(comando);
             DataSet dataset = new DataSet();
@@ -222,6 +222,7 @@ namespace Ponto
 
         public DataSet PontosBatidos(string id)
         {
+            ArquivoConfig();
             string dataAtual = DateTime.Now.ToString("yyyy-MM-dd");
             string dataAnterior = DateTime.Now.AddDays(-1).ToString("yyyy-MM-dd");
 
@@ -263,6 +264,7 @@ namespace Ponto
 
         public bool ValidarSenha(string id, string senha)
         {
+            ArquivoConfig();
             comando = new FbCommand($"SELECT * FROM FUNCIONARIO WHERE ID = {id}", con);
             FbDataAdapter data = new FbDataAdapter(comando);
             DataSet dataset = new DataSet();
@@ -287,6 +289,7 @@ namespace Ponto
 
         public bool ValidarSenhaAdmin(string id, string senha)
         {
+            ArquivoConfig();
             comando = new FbCommand($"SELECT * FROM FUNCIONARIO WHERE ID = {id}", con);
             FbDataAdapter data = new FbDataAdapter(comando);
             DataSet dataset = new DataSet();
@@ -299,6 +302,7 @@ namespace Ponto
 
         public int InserirSenhaGerada(string id, string senha)
         {
+            ArquivoConfig();
             // Faz o hash da senha antes de armazenar
             string senhaHashed = GerenciadorDeSenha.SenhaHash(senha);
 
@@ -311,6 +315,7 @@ namespace Ponto
 
         public void SalvarCadastro(string nome, string senha, string email)
         {
+            ArquivoConfig();
             // Faz o hash da senha antes de armazenar
             string senhaHashed = GerenciadorDeSenha.SenhaHash(senha);
 
@@ -338,6 +343,7 @@ namespace Ponto
 
         public void SalvarNome(string id, string nome)
         {
+            ArquivoConfig();
             comando = new FbCommand($"UPDATE FUNCIONARIO SET NOME = '{nome}' WHERE ID = {id}", con);
             con.Open();
 
@@ -354,6 +360,7 @@ namespace Ponto
 
         public void SalvarEmail(string id, string email)
         {
+            ArquivoConfig();
             comando = new FbCommand($"UPDATE FUNCIONARIO SET EMAIL = '{email}' WHERE ID = {id}", con);
             con.Open();
 
@@ -368,8 +375,48 @@ namespace Ponto
             con.Close();
         }
 
+        public void SalvarNomeEmpresa(string nome)
+        {
+            ArquivoConfig();
+            comando = new FbCommand("SELECT * FROM CONFIG", con);
+            con.Open();
+            FbDataAdapter data = new FbDataAdapter(comando);
+            DataSet dataset = new DataSet();
+            data.Fill(dataset, "CONFIG");
+            con.Close();
+
+            if (dataset.Tables["CONFIG"].Rows.Count > 0)
+            {
+                comando = new FbCommand($"UPDATE CONFIG SET NOMEEMPRESA = '{nome}'", con);
+                con.Open();
+                comando.ExecuteNonQuery();
+                con.Close();
+            }
+            else
+            {
+                comando = new FbCommand($"INSERT INTO CONFIG (NOMEEMPRESA) VALUES ('{nome}')", con);
+                con.Open();
+                comando.ExecuteNonQuery();
+                con.Close();
+            }
+
+        }
+
+        public string CarregarNomeEmpresa()
+        {
+            ArquivoConfig();
+            comando = new FbCommand("SELECT NOMEEMPRESA FROM CONFIG", con);
+            con.Open();
+            FbDataAdapter data = new FbDataAdapter(comando);
+            DataSet dataset = new DataSet();
+            data.Fill(dataset, "CONFIG");
+            con.Close();
+            return dataset.Tables["CONFIG"].Rows[0]["NOMEEMPRESA"].ToString();            
+        }
+
         public void SalvarConfiguracoesEmail(string emailPonte, string senha, string smtp, string porta, int ssl, string emailContabi)
         {
+            ArquivoConfig();
             comando = new FbCommand("SELECT * FROM CONFIG", con);
             con.Open();
             FbDataAdapter data = new FbDataAdapter(comando);
@@ -411,6 +458,7 @@ namespace Ponto
 
         public List<string> CarregarConfiguracoesEmail()
         {
+            ArquivoConfig();
             comando = new FbCommand($"SELECT * FROM CONFIG", con);
             FbDataAdapter data = new FbDataAdapter(comando);
             DataSet dataset = new DataSet();
@@ -438,7 +486,7 @@ namespace Ponto
 
         public int DesativarCadastro(string id, int ativo)
         {
-
+            ArquivoConfig();
             comando = new FbCommand($"UPDATE FUNCIONARIO SET ATIVO = {ativo} WHERE ID = {id}", con);
             con.Open();
             int i = comando.ExecuteNonQuery();
@@ -448,6 +496,7 @@ namespace Ponto
 
         public void InserirHora(string id)
         {
+            ArquivoConfig();
             var dataAtual = DateTime.Now.ToString("yyyy-MM-dd");
             var data = DateTime.Now.AddDays(-1).ToString("yyyy-MM-dd");
             var horaAtual = DateTime.Now.ToString("HH:mm:ss");

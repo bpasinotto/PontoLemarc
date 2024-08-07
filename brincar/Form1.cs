@@ -35,10 +35,22 @@ namespace Ponto
             {
                 Close();
             }
-            if (VariaveisGlobais.NomeEmpresa != "")
+            try
             {
-                txtNomeEmpresa.Text = VariaveisGlobais.NomeEmpresa;
-            }            
+                if(conexaoBanco.CarregarNomeEmpresa() == "")
+                {
+                    txtNomeEmpresa.Text = "Nome da Empresa";
+                }
+                else
+                {
+                    txtNomeEmpresa.Text = conexaoBanco.CarregarNomeEmpresa();
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro ao carregar o nome da empresa: " + ex.Message);
+            }
         }
 
         private void btnVerSenha_Click(object sender, EventArgs e)
@@ -401,21 +413,11 @@ namespace Ponto
 
             try
             {
-                string caminhoConfig = AppDomain.CurrentDomain.BaseDirectory + "config.ini";
-
-                string[] linhas = File.ReadAllLines(caminhoConfig);
-
-                string servidor = linhas[0].Split('=')[1];
-                string nomeBancoDados = linhas[1].Split('=')[1];
-                string nomeDaEmpresa = linhas[2].Split('=')[1];
-
-                string conteudoArquivo = $"Servidor={servidor}\nBancoDeDados={nomeBancoDados}\nNomeDaEmpresa={txtNomeEmpresa.Text}";
-                File.WriteAllText(caminhoConfig, conteudoArquivo);
+                conexaoBanco.SalvarNomeEmpresa(txtNomeEmpresa.Text);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                MessageBox.Show("Erro ao salvar o nome da empresa");
+                MessageBox.Show("Erro ao salvar o nome da empresa: " + ex.Message);
             }
 
         }
@@ -428,5 +430,7 @@ namespace Ponto
                 txtSenha.Enabled = true;
             }
         }
+
+        
     }
 }

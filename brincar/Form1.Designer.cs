@@ -629,7 +629,7 @@
         private System.Windows.Forms.Button btnRelatorios;
         private System.Windows.Forms.MaskedTextBox txtId;
         private System.Windows.Forms.MaskedTextBox txtSenha;
-        private System.Windows.Forms.TextBox txtNomeEmpresa;
+        public System.Windows.Forms.TextBox txtNomeEmpresa;
     }
 }
 

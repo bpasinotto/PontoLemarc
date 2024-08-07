@@ -26,7 +26,7 @@ namespace Ponto
     public partial class frmRelatorioPonto : Form
     {
         ConexaoBanco conexaoBanco = new ConexaoBanco();
-
+        Form1 form1;
         public frmRelatorioPonto()
         {
             InitializeComponent();
@@ -118,7 +118,8 @@ namespace Ponto
                     {
                         dataRow[cell.ColumnIndex] = cell.Value;
                     }
-                    dataRow["Empresa"] = VariaveisGlobais.NomeEmpresa;
+                    
+                    dataRow["Empresa"] = form1.txtNomeEmpresa.Text;
                     dt.Rows.Add(dataRow);
                 }
 
@@ -253,6 +254,7 @@ namespace Ponto
         static void SendEmail(MemoryStream stream)
         {
             ConexaoBanco conexaoBanco = new ConexaoBanco();
+            Form1 form1 = new Form1();
             if (conexaoBanco.CarregarConfiguracoesEmail() != null)
             {
                 List<string> config = conexaoBanco.CarregarConfiguracoesEmail();
@@ -266,7 +268,7 @@ namespace Ponto
 
                 string emailPonte = config[0];
                 string emailContabi = config[5];
-                string assunto = "Relatório de Ponto " + VariaveisGlobais.NomeEmpresa;
+                string assunto = "Relatório de Ponto " + form1.txtNomeEmpresa.Text;
                 string corpo = "Por favor, veja a planilha em anexo.";
                 string smtpServer = config[2];
                 int porta = int.Parse(config[3]);
@@ -282,7 +284,7 @@ namespace Ponto
                     mail.IsBodyHtml = false;
 
                     stream.Seek(0, SeekOrigin.Begin);
-                    Attachment attachment = new Attachment(stream, "Relatório de Ponto " + VariaveisGlobais.NomeEmpresa +".xlsx", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+                    Attachment attachment = new Attachment(stream, "Relatório de Ponto " + form1.txtNomeEmpresa.Text + ".xlsx", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
                     mail.Attachments.Add(attachment);
 
                     using (SmtpClient smtp = new SmtpClient(smtpServer, porta))
