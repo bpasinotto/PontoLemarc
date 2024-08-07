@@ -501,7 +501,6 @@
             this.lblHoraAtual.Size = new System.Drawing.Size(139, 37);
             this.lblHoraAtual.TabIndex = 22;
             this.lblHoraAtual.Text = "00:00:00";
-            this.lblHoraAtual.DoubleClick += new System.EventHandler(this.lblHoraAtual_DoubleClick);
             // 
             // pnHoras
             // 

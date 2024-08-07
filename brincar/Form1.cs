@@ -338,28 +338,25 @@ namespace Ponto
         }
 
 
-        private void lblHoraAtual_DoubleClick(object sender, EventArgs e)
-        {
-
-            if (WindowState == FormWindowState.Normal)
-            {
-                WindowState = FormWindowState.Maximized;
-            }
-            else
-            {
-                WindowState = FormWindowState.Normal;
-            }
-
-        }
+       
 
         private void btnRelatorios_Click(object sender, EventArgs e)
         {
-            frmSenhaDoAdmin senhaDoAdmin = new frmSenhaDoAdmin();
-            if (senhaDoAdmin.ShowDialog() == DialogResult.OK)
+            var t = conexaoBanco.ConsultarPorId("1").Tables["FUNCIONARIO"].Rows.Count;
+            if (t == 0)
             {
-                frmRelatorioPonto consultaPonto = new frmRelatorioPonto();
-                consultaPonto.ShowDialog();
-            }            
+                MessageBox.Show("Crie o primeiro cadastro para visualizar os relatórios", "Atenção!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                frmSenhaDoAdmin senhaDoAdmin = new frmSenhaDoAdmin();
+                if (senhaDoAdmin.ShowDialog() == DialogResult.OK)
+                {
+                    frmRelatorioPonto consultaPonto = new frmRelatorioPonto();
+                    consultaPonto.ShowDialog();
+                }
+            }
+                      
         }
                
 

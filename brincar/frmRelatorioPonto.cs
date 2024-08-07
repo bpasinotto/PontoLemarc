@@ -19,6 +19,7 @@ using CrystalDecisions.Windows.Forms;
 using OfficeOpenXml;
 using static System.Net.Mime.MediaTypeNames;
 using LicenseContext = OfficeOpenXml.LicenseContext;
+using System.Globalization;
 
 namespace Ponto
 {
@@ -45,37 +46,50 @@ namespace Ponto
 
         private void btnConsultar_Click(object sender, EventArgs e)
         {
-            //DataSet dataset = conexaoBanco.ConsultaPorNome(cbFuncionario.Text);
+            DataTable dataTable;
 
             if (cbFuncionario.Text == "Todos")
             {
                 string dataInicial = dtDataInicial.Value.ToString("yyyy-MM-dd");
                 string dataFinal = dtDataFinal.Value.ToString("yyyy-MM-dd");
 
-                dgvConsultaPonto.DataSource = conexaoBanco.ConsultaPontosTodos(dataInicial, dataFinal);
-                dgvConsultaPonto.DataMember = "CONSULTA_PONTOS";
-                dgvConsultaPonto.AutoGenerateColumns = true;
-                dgvConsultaPonto.Sort(dgvConsultaPonto.Columns[0], ListSortDirection.Ascending);
-                dgvConsultaPonto.Font = new Font("Montserrat SemiBold", 10, FontStyle.Bold);
-                dgvConsultaPonto.Refresh();
+                dataTable = conexaoBanco.ConsultaPontosTodos(dataInicial, dataFinal).Tables["CONSULTA_PONTOS"];
             }
             else
             {
-                //int id = (int)dataset.Tables["FUNCIONARIO"].Rows[0]["ID"];
-
                 string dataInicial = dtDataInicial.Value.ToString("yyyy-MM-dd");
                 string dataFinal = dtDataFinal.Value.ToString("yyyy-MM-dd");
 
-                dgvConsultaPonto.DataSource = conexaoBanco.PontosPorData(cbFuncionario.Text, dataInicial, dataFinal);
-                dgvConsultaPonto.DataMember = "CONSULTA_PONTOS";
-                dgvConsultaPonto.AutoGenerateColumns = true;
-                dgvConsultaPonto.Sort(dgvConsultaPonto.Columns[0], ListSortDirection.Ascending);
-                dgvConsultaPonto.Refresh();
+                dataTable = conexaoBanco.PontosPorData(cbFuncionario.Text, dataInicial, dataFinal).Tables["CONSULTA_PONTOS"];
             }
 
+            // Calcular a soma da coluna "Total/Dia"
+            TimeSpan totalHorasTrabalhadas = new TimeSpan();
+            foreach (DataRow row in dataTable.Rows)
+            {
+                if (TimeSpan.TryParse(row["Total/Dia"].ToString(), out TimeSpan horasTrabalhadas))
+                {
+                    totalHorasTrabalhadas += horasTrabalhadas;
+                }
+            }
 
+            // Adicionar a linha de soma ao DataTable
+            DataRow totalRow = dataTable.NewRow();
+            totalRow["Funcionário"] = "Horas trabalhadas";
+            totalRow["Total/Dia"] = totalHorasTrabalhadas.TotalHours.ToString("00",CultureInfo.InvariantCulture) + ":" + totalHorasTrabalhadas.Minutes.ToString("00", CultureInfo.InvariantCulture);
+            dataTable.Rows.Add(totalRow);
 
+            // Configurar o DataGridView para exibir os dados
+            dgvConsultaPonto.Font = new Font("Montserrat SemiBold", 10, FontStyle.Bold);
+            dgvConsultaPonto.DataSource = dataTable;
+            dgvConsultaPonto.RowHeadersVisible = false;
+            dgvConsultaPonto.AutoGenerateColumns = true;   
+            dgvConsultaPonto.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
+            //dgvConsultaPonto.Sort(dgvConsultaPonto.Columns[0], ListSortDirection.Ascending);
+            
+            dgvConsultaPonto.Refresh();            
         }
+
 
         private void btnImprimir_Click(object sender, EventArgs e)
         {
