@@ -37,7 +37,7 @@ namespace Ponto
             }
             try
             {
-                if(conexaoBanco.CarregarNomeEmpresa() == "")
+                if(conexaoBanco.CarregarNomeEmpresa() == null)
                 {
                     txtNomeEmpresa.Text = "Nome da Empresa";
                 }
@@ -326,7 +326,7 @@ namespace Ponto
                 {
                     LimparCampos();
                     txtId.Focus();
-                    activeTextBox = txtId;
+                    activeTextBox = txtId;                    
                 }
 
             }
@@ -357,7 +357,7 @@ namespace Ponto
             var t = conexaoBanco.ConsultarPorId("1").Tables["FUNCIONARIO"].Rows.Count;
             if (t == 0)
             {
-                MessageBox.Show("Crie o primeiro cadastro para visualizar os relatórios", "Atenção!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Crie o primeiro cadastro para visualizar os relatórios.\nClique na lupa ao lado do campo Id e depois em Cadastrar.", "Atenção!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             else
             {

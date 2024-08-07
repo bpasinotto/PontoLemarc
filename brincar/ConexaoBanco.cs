@@ -76,7 +76,7 @@ namespace Ponto
             {
 
                 // Criando o conteúdo do arquivo de texto
-                string conteudoArquivo = "Servidor=\nBancoDeDados=\nNomeDaEmpresa=";
+                string conteudoArquivo = "Servidor=\nBancoDeDados=";
 
                 // Escrevendo o conteúdo no arquivo
                 try
@@ -411,7 +411,15 @@ namespace Ponto
             DataSet dataset = new DataSet();
             data.Fill(dataset, "CONFIG");
             con.Close();
-            return dataset.Tables["CONFIG"].Rows[0]["NOMEEMPRESA"].ToString();            
+
+            if (dataset.Tables["CONFIG"].Rows.Count == 0)
+            {
+                return null;
+            }
+            else
+            {
+                return dataset.Tables["CONFIG"].Rows[0]["NOMEEMPRESA"].ToString();
+            }
         }
 
         public void SalvarConfiguracoesEmail(string emailPonte, string senha, string smtp, string porta, int ssl, string emailContabi)
