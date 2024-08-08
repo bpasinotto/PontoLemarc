@@ -16,10 +16,19 @@ namespace Ponto
         [STAThread]
 
         static void Main()
-        {            
+        {
             Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.SetCompatibleTextRenderingDefault(false);            
+
+            ConexaoBanco conexaoBanco = new ConexaoBanco();
+            if (conexaoBanco.ArquivoConfig() == false)
+            {
+                Application.Exit();
+            }
+            else
+            {
+                Application.Run(new Form1());
+            }
         }
 
         

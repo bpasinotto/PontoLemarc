@@ -18,7 +18,7 @@ namespace Ponto
     public partial class Form1 : Form
     {
         private MaskedTextBox activeTextBox; // Armazena o campo de texto ativo
-        private ConexaoBanco conexaoBanco;
+        private ConexaoBanco conexaoBanco = new ConexaoBanco();
         public Form1()
         {
             InitializeComponent();            
@@ -30,11 +30,11 @@ namespace Ponto
             activeTextBox = txtId;            
             txtId.Focus();
             LimparCampos();
-            conexaoBanco = new ConexaoBanco();
-            if (conexaoBanco.ArquivoConfig() == false)
-            {
-                Close();
-            }
+            //conexaoBanco = new ConexaoBanco();
+            //if (conexaoBanco.ArquivoConfig() == false)
+            //{
+            //    Close();
+            //}
             try
             {
                 if(conexaoBanco.CarregarNomeEmpresa() == null)
@@ -364,7 +364,7 @@ namespace Ponto
                 frmSenhaDoAdmin senhaDoAdmin = new frmSenhaDoAdmin();
                 if (senhaDoAdmin.ShowDialog() == DialogResult.OK)
                 {
-                    frmRelatorioPonto consultaPonto = new frmRelatorioPonto();
+                    frmRelatorioPonto consultaPonto = new frmRelatorioPonto(txtNomeEmpresa.Text);
                     consultaPonto.ShowDialog();
                 }
             }
