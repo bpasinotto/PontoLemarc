@@ -62,6 +62,7 @@
             this.txtId = new System.Windows.Forms.MaskedTextBox();
             this.txtSenha = new System.Windows.Forms.MaskedTextBox();
             this.txtNomeEmpresa = new System.Windows.Forms.TextBox();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.panel1.SuspendLayout();
             this.tecladoNumerico.SuspendLayout();
             this.pnHoras.SuspendLayout();
@@ -475,6 +476,7 @@
             this.btnFechar.Name = "btnFechar";
             this.btnFechar.Size = new System.Drawing.Size(38, 33);
             this.btnFechar.TabIndex = 25;
+            this.toolTip1.SetToolTip(this.btnFechar, "Aperte a tecla ESC no teclado para fechar.");
             this.btnFechar.UseVisualStyleBackColor = true;
             this.btnFechar.Click += new System.EventHandler(this.btnFechar_Click);
             // 
@@ -482,6 +484,7 @@
             // 
             this.lblDataAtual.AutoSize = true;
             this.lblDataAtual.BackColor = System.Drawing.Color.Transparent;
+            this.lblDataAtual.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblDataAtual.Font = new System.Drawing.Font("Montserrat SemiBold", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDataAtual.ForeColor = System.Drawing.Color.White;
             this.lblDataAtual.Location = new System.Drawing.Point(3, 69);
@@ -494,6 +497,7 @@
             // 
             this.lblHoraAtual.AutoSize = true;
             this.lblHoraAtual.BackColor = System.Drawing.Color.Transparent;
+            this.lblHoraAtual.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblHoraAtual.Font = new System.Drawing.Font("Montserrat SemiBold", 20.25F, System.Drawing.FontStyle.Bold);
             this.lblHoraAtual.ForeColor = System.Drawing.Color.White;
             this.lblHoraAtual.Location = new System.Drawing.Point(200, 69);
@@ -561,14 +565,21 @@
             this.txtNomeEmpresa.Enter += new System.EventHandler(this.txtNomeEmpresa_Enter);
             this.txtNomeEmpresa.Leave += new System.EventHandler(this.txtNomeEmpresa_Leave);
             // 
+            // toolTip1
+            // 
+            this.toolTip1.AutoPopDelay = 5000;
+            this.toolTip1.InitialDelay = 1;
+            this.toolTip1.ReshowDelay = 100;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(3)))), ((int)(((byte)(172)))));
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(65)))), ((int)(((byte)(216)))));
             this.BackgroundImage = global::Ponto.Properties.Resources.fundo4;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(800, 600);
+            this.ControlBox = false;
             this.Controls.Add(this.txtNomeEmpresa);
             this.Controls.Add(this.lblNomeFuncionario);
             this.Controls.Add(this.txtSenha);
@@ -583,6 +594,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
+            this.Opacity = 0D;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Ponto";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
@@ -630,6 +642,7 @@
         private System.Windows.Forms.MaskedTextBox txtId;
         private System.Windows.Forms.MaskedTextBox txtSenha;
         public System.Windows.Forms.TextBox txtNomeEmpresa;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }
 

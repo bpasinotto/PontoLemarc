@@ -16,25 +16,22 @@ using System.IO;
 namespace Ponto
 {
     public partial class Form1 : Form
-    {
+    {        
         private MaskedTextBox activeTextBox; // Armazena o campo de texto ativo
         private ConexaoBanco conexaoBanco = new ConexaoBanco();
         public Form1()
-        {
+        {           
             InitializeComponent();            
         }
 
 
-        private void Form1_Load(object sender, EventArgs e)
+        private async void Form1_Load(object sender, EventArgs e)
         {            
             activeTextBox = txtId;            
             txtId.Focus();
+            txtSenha.Enabled = false;
             LimparCampos();
-            //conexaoBanco = new ConexaoBanco();
-            //if (conexaoBanco.ArquivoConfig() == false)
-            //{
-            //    Close();
-            //}
+           
             try
             {
                 if(conexaoBanco.CarregarNomeEmpresa() == null)
@@ -51,6 +48,14 @@ namespace Ponto
             {
                 MessageBox.Show("Erro ao carregar o nome da empresa: " + ex.Message);
             }
+                         
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            lblDataAtual.Text = DateTime.Now.ToShortDateString();
+            lblHoraAtual.Text = DateTime.Now.ToLongTimeString();
+            this.Opacity = 1.00;
         }
 
         private void btnVerSenha_Click(object sender, EventArgs e)
@@ -64,14 +69,6 @@ namespace Ponto
                 txtSenha.UseSystemPasswordChar = true;
             }
         }
-
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            lblDataAtual.Text = DateTime.Now.ToShortDateString();
-            lblHoraAtual.Text = DateTime.Now.ToLongTimeString();
-        }
-
-
 
         private void num2_Click(object sender, EventArgs e)
         {
@@ -200,7 +197,7 @@ namespace Ponto
             LimparCampos();
             frmConsultaFuncionario consultaFuncionario = new frmConsultaFuncionario();
             consultaFuncionario.ShowDialog();
-            txtSenha.Enabled = true;
+            
             if (VariaveisGlobais.CodigoTroca.ToString() == "0")
             {
                 txtId.Text = "";
@@ -214,6 +211,9 @@ namespace Ponto
             {
                 txtId_KeyDown(sender, new KeyEventArgs(Keys.Enter));
             }
+
+            txtId.Focus();
+            activeTextBox = txtId;
         }
 
         private void btnCadastrar_Click(object sender, EventArgs e)
@@ -225,6 +225,10 @@ namespace Ponto
 
         private void txtId_KeyDown(object sender, KeyEventArgs e)
         {
+            if (e.KeyCode == Keys.Escape)
+            {
+                Close();
+            }
             // Evita a movimentação do cursor com a tecla Espaço
             if (e.KeyCode == Keys.Space)
             {
@@ -251,6 +255,7 @@ namespace Ponto
 
                     string nome = dataset.Tables["FUNCIONARIO"].Rows[0]["NOME"].ToString();
                     lblNomeFuncionario.Text = nome;
+                    txtSenha.Enabled = true;
 
                     dataset = conexaoBanco.PontosBatidos(txtId.Text);
 
@@ -346,11 +351,10 @@ namespace Ponto
 
         private void btnFechar_Click(object sender, EventArgs e)
         {
+            this.Opacity = 0.00;
             Close();
         }
 
-
-       
 
         private void btnRelatorios_Click(object sender, EventArgs e)
         {
@@ -358,6 +362,7 @@ namespace Ponto
             if (t == 0)
             {
                 MessageBox.Show("Crie o primeiro cadastro para visualizar os relatórios.\nClique na lupa ao lado do campo Id e depois em Cadastrar.", "Atenção!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
             }
             else
             {
@@ -368,7 +373,8 @@ namespace Ponto
                     consultaPonto.ShowDialog();
                 }
             }
-                      
+            txtId.Focus();
+            activeTextBox = txtId;
         }
                
 
@@ -427,7 +433,7 @@ namespace Ponto
             if (txtId.Text == "")
             {
                 LimparCampos();
-                txtSenha.Enabled = true;
+                txtSenha.Enabled = false;
             }
         }
 

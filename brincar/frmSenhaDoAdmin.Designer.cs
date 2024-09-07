@@ -112,9 +112,10 @@
             this.Controls.Add(this.txtSenha);
             this.Controls.Add(this.btnContinuar);
             this.Controls.Add(this.label1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "frmSenhaDoAdmin";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.Text = "Senha";
             this.Load += new System.EventHandler(this.frmSenhaDoAdmin_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
