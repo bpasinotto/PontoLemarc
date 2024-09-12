@@ -12,29 +12,30 @@ using FirebirdSql.Data.FirebirdClient;
 using System.Threading;
 using System.Drawing.Text;
 using System.IO;
+using System.Timers;
 
 namespace Ponto
 {
     public partial class Form1 : Form
-    {        
+    {
         private MaskedTextBox activeTextBox; // Armazena o campo de texto ativo
         private ConexaoBanco conexaoBanco = new ConexaoBanco();
         public Form1()
-        {           
-            InitializeComponent();            
+        {
+            InitializeComponent();
         }
 
 
         private async void Form1_Load(object sender, EventArgs e)
-        {            
-            activeTextBox = txtId;            
+        {              
+            activeTextBox = txtId;
             txtId.Focus();
             txtSenha.Enabled = false;
             LimparCampos();
-           
+
             try
             {
-                if(conexaoBanco.CarregarNomeEmpresa() == null)
+                if (conexaoBanco.CarregarNomeEmpresa() == null)
                 {
                     txtNomeEmpresa.Text = "Nome da Empresa";
                 }
@@ -42,13 +43,13 @@ namespace Ponto
                 {
                     txtNomeEmpresa.Text = conexaoBanco.CarregarNomeEmpresa();
                 }
-                
+
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Erro ao carregar o nome da empresa: " + ex.Message);
             }
-                         
+
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -118,7 +119,7 @@ namespace Ponto
         {
             if (activeTextBox == txtId)
             {
-                txtId_KeyDown(sender, new KeyEventArgs(Keys.Enter));                
+                txtId_KeyDown(sender, new KeyEventArgs(Keys.Enter));
             }
             else
             {
@@ -182,7 +183,7 @@ namespace Ponto
         }
 
         private void txtId_Click(object sender, EventArgs e)
-        {            
+        {
             activeTextBox = (MaskedTextBox)sender; // Define o campo de texto como ativo
         }
 
@@ -197,7 +198,7 @@ namespace Ponto
             LimparCampos();
             frmConsultaFuncionario consultaFuncionario = new frmConsultaFuncionario();
             consultaFuncionario.ShowDialog();
-            
+
             if (VariaveisGlobais.CodigoTroca.ToString() == "0")
             {
                 txtId.Text = "";
@@ -241,18 +242,16 @@ namespace Ponto
             }
 
             if (e.KeyCode == Keys.Enter && txtId.Text != "")
-            {                
+            {
 
                 // Chamar o método ConsultarPorId e obter o resultado da consulta
                 conexaoBanco = new ConexaoBanco();
                 DataSet dataset = conexaoBanco.ConsultarPorId(txtId.Text);
-                               
+
                 // Acessar o valor da coluna "NOME" e exibi-lo no rótulo
 
                 if (dataset.Tables["FUNCIONARIO"].Rows.Count > 0)
-                {
-                    pnHoras.Visible = true;
-
+                {                    
                     string nome = dataset.Tables["FUNCIONARIO"].Rows[0]["NOME"].ToString();
                     lblNomeFuncionario.Text = nome;
                     txtSenha.Enabled = true;
@@ -266,7 +265,7 @@ namespace Ponto
                             if (dataset.Tables["HORAS"].Rows[0][$"HORA{i}"].ToString() != "")
                             {
                                 if (i == 1)
-                                {                                    
+                                {
                                     lblHora1.Text = DateTime.Parse(dataset.Tables["HORAS"].Rows[0][$"HORA{i}"].ToString()).ToString("HH:mm:ss");
                                 }
                                 else if (i == 2)
@@ -283,10 +282,9 @@ namespace Ponto
                                 }
 
                             }
-
                         }
                     }
-                                      
+
 
                     if (lblHora4.Text == "Vazio")
                     {
@@ -300,6 +298,8 @@ namespace Ponto
                         activeTextBox = txtId;
                     }
 
+                    pnHoras.Visible = true;
+
                 }
                 else
                 {
@@ -308,10 +308,10 @@ namespace Ponto
 
             }
         }
-         
+                
 
         private void txtSenha_KeyDown(object sender, KeyEventArgs e)
-        {            
+        {
             // Evita a movimentação do cursor com a tecla Espaço
             if (e.KeyCode == Keys.Space)
             {
@@ -331,7 +331,7 @@ namespace Ponto
                 {
                     LimparCampos();
                     txtId.Focus();
-                    activeTextBox = txtId;                    
+                    activeTextBox = txtId;
                 }
 
             }
@@ -339,6 +339,7 @@ namespace Ponto
 
         public void LimparCampos()
         {
+            pnHoras.Visible = false;            
             txtId.Text = "";
             txtSenha.Text = "";
             lblNomeFuncionario.Text = "";
@@ -346,7 +347,6 @@ namespace Ponto
             lblHora2.Text = "Vazio";
             lblHora3.Text = "Vazio";
             lblHora4.Text = "Vazio";
-            pnHoras.Visible = false;
         }
 
         private void btnFechar_Click(object sender, EventArgs e)
@@ -376,12 +376,12 @@ namespace Ponto
             txtId.Focus();
             activeTextBox = txtId;
         }
-               
+
 
         private void txtId_MouseDown(object sender, MouseEventArgs e)
         {
             // Evita a movimentação do cursor ao clicar com o mouse
-            txtId.SelectionStart = txtId.Text.Length;            
+            txtId.SelectionStart = txtId.Text.Length;
         }
 
         private void txtId_MouseMove(object sender, MouseEventArgs e)
@@ -406,7 +406,7 @@ namespace Ponto
         {
             if (txtNomeEmpresa.Text == "Nome da Empresa")
             {
-                txtNomeEmpresa.Text = "";                
+                txtNomeEmpresa.Text = "";
             }
         }
 
@@ -414,7 +414,7 @@ namespace Ponto
         {
             if (txtNomeEmpresa.Text == "")
             {
-                txtNomeEmpresa.Text = "Nome da Empresa";                
+                txtNomeEmpresa.Text = "Nome da Empresa";
             }
 
             try
@@ -432,11 +432,10 @@ namespace Ponto
         {
             if (txtId.Text == "")
             {
-                LimparCampos();
                 txtSenha.Enabled = false;
+                LimparCampos();
             }
         }
-
-        
+                
     }
 }

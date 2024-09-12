@@ -152,10 +152,10 @@
             // lblHora1
             // 
             this.lblHora1.AutoSize = true;
-            this.lblHora1.BackColor = System.Drawing.Color.Transparent;
+            this.lblHora1.BackColor = System.Drawing.Color.White;
             this.lblHora1.Font = new System.Drawing.Font("Montserrat", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblHora1.ForeColor = System.Drawing.Color.Black;
-            this.lblHora1.Location = new System.Drawing.Point(11, 0);
+            this.lblHora1.Location = new System.Drawing.Point(4, 6);
             this.lblHora1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblHora1.Name = "lblHora1";
             this.lblHora1.Size = new System.Drawing.Size(94, 37);
@@ -165,10 +165,10 @@
             // lblHora2
             // 
             this.lblHora2.AutoSize = true;
-            this.lblHora2.BackColor = System.Drawing.Color.Transparent;
+            this.lblHora2.BackColor = System.Drawing.Color.White;
             this.lblHora2.Font = new System.Drawing.Font("Montserrat", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblHora2.ForeColor = System.Drawing.Color.Black;
-            this.lblHora2.Location = new System.Drawing.Point(11, 48);
+            this.lblHora2.Location = new System.Drawing.Point(4, 52);
             this.lblHora2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblHora2.Name = "lblHora2";
             this.lblHora2.Size = new System.Drawing.Size(94, 37);
@@ -178,10 +178,10 @@
             // lblHora3
             // 
             this.lblHora3.AutoSize = true;
-            this.lblHora3.BackColor = System.Drawing.Color.Transparent;
+            this.lblHora3.BackColor = System.Drawing.Color.White;
             this.lblHora3.Font = new System.Drawing.Font("Montserrat", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblHora3.ForeColor = System.Drawing.Color.Black;
-            this.lblHora3.Location = new System.Drawing.Point(11, 96);
+            this.lblHora3.Location = new System.Drawing.Point(4, 99);
             this.lblHora3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblHora3.Name = "lblHora3";
             this.lblHora3.Size = new System.Drawing.Size(94, 37);
@@ -191,10 +191,10 @@
             // lblHora4
             // 
             this.lblHora4.AutoSize = true;
-            this.lblHora4.BackColor = System.Drawing.Color.Transparent;
+            this.lblHora4.BackColor = System.Drawing.Color.White;
             this.lblHora4.Font = new System.Drawing.Font("Montserrat", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblHora4.ForeColor = System.Drawing.Color.Black;
-            this.lblHora4.Location = new System.Drawing.Point(11, 144);
+            this.lblHora4.Location = new System.Drawing.Point(4, 146);
             this.lblHora4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblHora4.Name = "lblHora4";
             this.lblHora4.Size = new System.Drawing.Size(94, 37);
